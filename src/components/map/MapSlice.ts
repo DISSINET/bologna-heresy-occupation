@@ -12,8 +12,8 @@ export interface MapState {
 }
 
 const initialState: MapState = {
-  longitude: 16.8,
-  latitude: 49.7,
+  longitude: 10.5,
+  latitude: 44.7,
   zoom: 7,
   pitch: 0,
   bearing: 0,
