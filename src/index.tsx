@@ -1,5 +1,6 @@
 import React from "react";
 import "./index.css";
+import "./App.css";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
