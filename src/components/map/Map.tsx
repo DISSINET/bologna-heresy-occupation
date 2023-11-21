@@ -1,10 +1,11 @@
 import DeckGL from "@deck.gl/react/typed";
-import { BitmapLayer } from "@deck.gl/layers/typed";
+import { BitmapLayer, ScatterplotLayer } from "@deck.gl/layers/typed";
 import { TileLayer } from "@deck.gl/geo-layers/typed";
 import { useAppSelector, useAppDispatch } from "./../../app/hooks";
 import { updateMapState } from "./MapSlice";
 import MapControls from "./MapControls";
 import MapScale from "./MapScale";
+import locations from "../../data/locations.json";
 
 const MapComponent = ({}): JSX.Element => {
   const mapState = useAppSelector((state) => state.map);
@@ -42,7 +43,34 @@ const MapComponent = ({}): JSX.Element => {
     },
   });
 
-  const layers = [cityLevel];
+  const places = new ScatterplotLayer({
+    id: "places",
+    data: locations,
+    pickable: true,
+    stroked: true,
+    filled: true,
+    getElevation: 30,
+    getPosition: (d: any) => [
+      d.residence_x_coordinates,
+      d.residence_y_coordinates,
+    ],
+    opacity: 0.3,
+    radiusMinPixels: mapState.zoom * 0.5,
+    radiusMaxPixels: mapState.zoom * 5,
+    getRadius: (d) => Math.sqrt(parseInt(d.male) + parseInt(d.female)),
+    lineWidthMinPixels: 1,
+    getFillColor: (d) => [3, 190, 3],
+    getLineColor: (d) => [2, 20, 30],
+    // hover buffer around object
+    pickingRadius: 50,
+
+    // prevent Z-fighting in tilted view
+    parameters: {
+      depthTest: false,
+    },
+  });
+
+  const layers = [cityLevel, places];
   return (
     <div onContextMenu={(evt) => evt.preventDefault()}>
       <MapControls />
