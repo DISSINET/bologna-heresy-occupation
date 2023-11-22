@@ -7,6 +7,7 @@ import MapControls from "./MapControls";
 import MapScale from "./MapScale";
 import { selectLocation } from "./../MainSlice";
 import locations from "../../data/locations.json";
+import getResidenceNames from "../../utils/getResidenceName";
 
 const MapComponent = ({}): JSX.Element => {
   const mapState = useAppSelector((state) => state.map);
@@ -87,7 +88,9 @@ const MapComponent = ({}): JSX.Element => {
         onViewStateChange={(e: any) => dispatchMapState(e.viewState)}
         controller={true}
         layers={layers}
-        getTooltip={({ object }) => object && `${object.residence_id}`}
+        getTooltip={({ object }) =>
+          object && `${getResidenceNames(object.residence_id)}`
+        }
         getCursor={({ isDragging }) => (isDragging ? "arrow" : "arrow")}
       />
     </div>

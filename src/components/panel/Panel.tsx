@@ -8,6 +8,7 @@ import { BiLinkExternal } from "react-icons/bi";
 import { selectLocation } from "../MainSlice";
 import packageJson from "../../../package.json";
 import { Card } from "react-bootstrap";
+import getResidenceNames from "../../utils/getResidenceName";
 
 type PanelComponentProps = {};
 
@@ -92,7 +93,11 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 </span>
               </Card.Header>
               <Card.Body>
-                <Card.Title>Title</Card.Title>
+                <Card.Title>
+                  {getResidenceNames(
+                    selectedLocation["residence_id"] as string
+                  )}
+                </Card.Title>
                 <Card.Subtitle className="mb-3 text-muted">
                   Subtitle
                 </Card.Subtitle>
