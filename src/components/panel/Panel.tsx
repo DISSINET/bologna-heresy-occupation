@@ -5,7 +5,9 @@ import { Container, Modal, Button, CloseButton } from "react-bootstrap";
 import { GoLocation } from "react-icons/go";
 import { BsCheckLg, BsListUl } from "react-icons/bs";
 import { BiLinkExternal } from "react-icons/bi";
+import { selectLocation } from "../MainSlice";
 import packageJson from "../../../package.json";
+import { Card } from "react-bootstrap";
 
 type PanelComponentProps = {};
 
@@ -15,7 +17,15 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
   const handleInfoModalClose = () => toggleInfoModal(false);
   const handleInfoModalShow = () => toggleInfoModal(true);
 
+  const selectedLocation = useAppSelector(
+    (state) => state.main.selectedLocation
+  );
+
   const now = new Date();
+
+  function deselectLocation() {
+    dispatch(selectLocation({}));
+  }
 
   return (
     <div
@@ -44,6 +54,60 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
           }}
         >
           <span></span>
+        </div>
+        <div id="section5">
+          <span>
+            <b>Location details</b>
+          </span>
+          {Object.keys(selectedLocation).length !== 0 ? (
+            <Card style={{ marginTop: "8px" }}>
+              <Card.Header className="text-muted">
+                <span
+                  style={{ cursor: "pointer" }}
+                  title="Copy coordinates"
+                  onClick={() => {
+                    navigator.clipboard.writeText(
+                      `${selectedLocation["residence_y_coordinates"]}, ${selectedLocation["residence_x_coordinates"]}`
+                    );
+                  }}
+                >
+                  <GoLocation />{" "}
+                  <small>
+                    <small>
+                      <>
+                        {selectedLocation["residence_y_coordinates"]},
+                        {selectedLocation["residence_x_coordinates"]}
+                      </>
+                    </small>
+                    <CloseButton
+                      aria-label="Hide"
+                      onClick={deselectLocation}
+                      style={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "10px",
+                      }}
+                    />{" "}
+                  </small>
+                </span>
+              </Card.Header>
+              <Card.Body>
+                <Card.Title>Title</Card.Title>
+                <Card.Subtitle className="mb-3 text-muted">
+                  Subtitle
+                </Card.Subtitle>
+              </Card.Body>
+            </Card>
+          ) : (
+            <>
+              <br />
+              <span style={{ marginTop: "8px" }} className="text-muted">
+                <small>
+                  <i>Select location from the map</i>
+                </small>
+              </span>
+            </>
+          )}
         </div>
 
         <div

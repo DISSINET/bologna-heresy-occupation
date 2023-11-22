@@ -5,6 +5,7 @@ import { useAppSelector, useAppDispatch } from "./../../app/hooks";
 import { updateMapState } from "./MapSlice";
 import MapControls from "./MapControls";
 import MapScale from "./MapScale";
+import { selectLocation } from "./../MainSlice";
 import locations from "../../data/locations.json";
 
 const MapComponent = ({}): JSX.Element => {
@@ -13,6 +14,9 @@ const MapComponent = ({}): JSX.Element => {
 
   function dispatchMapState(val: any) {
     dispatch(updateMapState(val));
+  }
+  function dispatchSelectedLocation(loc: any) {
+    dispatch(selectLocation(loc));
   }
 
   const cityLevel = new TileLayer({
@@ -57,12 +61,15 @@ const MapComponent = ({}): JSX.Element => {
     opacity: 0.3,
     radiusMinPixels: mapState.zoom * 0.5,
     radiusMaxPixels: mapState.zoom * 5,
-    getRadius: (d) => Math.sqrt(parseInt(d.male) + parseInt(d.female)),
+    //getRadius: (d) => parseInt(d.female) * 100,
     lineWidthMinPixels: 1,
     getFillColor: (d) => [3, 190, 3],
     getLineColor: (d) => [2, 20, 30],
     // hover buffer around object
     pickingRadius: 50,
+    //onHover: TODO set shadow or something
+
+    onClick: (object) => object && dispatchSelectedLocation(object.object),
 
     // prevent Z-fighting in tilted view
     parameters: {
@@ -80,7 +87,7 @@ const MapComponent = ({}): JSX.Element => {
         onViewStateChange={(e: any) => dispatchMapState(e.viewState)}
         controller={true}
         layers={layers}
-        //getTooltip={({ object }) => object && `${treatMonasteryName(object.name, object.communities)}` }
+        getTooltip={({ object }) => object && `${object.residence_id}`}
         getCursor={({ isDragging }) => (isDragging ? "arrow" : "arrow")}
       />
     </div>

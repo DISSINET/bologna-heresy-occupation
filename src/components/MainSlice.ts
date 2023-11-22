@@ -1,15 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Location } from "./../types";
 
-export interface MainSlice {}
+export interface MainSlice {
+  selectedLocation: Location;
+}
 
-const initialState: MainSlice = {};
+const initialState: MainSlice = {
+  selectedLocation: <Location>{},
+};
 
 export const mainSlice = createSlice({
   name: "layout",
   initialState,
-  reducers: {},
+  reducers: {
+    selectLocation: (state, action: PayloadAction<Location>) => {
+      let newSelectedLocation = action.payload;
+      state.selectedLocation = newSelectedLocation;
+    },
+  },
 });
 
-export const {} = mainSlice.actions;
+export const { selectLocation } = mainSlice.actions;
 
 export default mainSlice.reducer;
