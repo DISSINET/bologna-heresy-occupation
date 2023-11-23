@@ -1,14 +1,25 @@
 import { useState } from "react";
 import Hero from "./Hero";
 import { useAppSelector, useAppDispatch } from "./../../app/hooks";
-import { Container, Modal, Button, CloseButton } from "react-bootstrap";
+import {
+  ListGroup,
+  Container,
+  Modal,
+  Button,
+  CloseButton,
+  Row,
+  Col,
+} from "react-bootstrap";
 import { GoLocation } from "react-icons/go";
+import { BsGenderMale, BsGenderFemale } from "react-icons/bs";
 import { BsCheckLg, BsListUl } from "react-icons/bs";
 import { BiLinkExternal } from "react-icons/bi";
 import { selectLocation } from "../MainSlice";
 import packageJson from "../../../package.json";
 import { Card } from "react-bootstrap";
 import getResidenceNames from "../../utils/getResidenceName";
+import peopleData from "../../data/people.json";
+import { INestDictionary, IDictionary } from "../../types";
 
 type PanelComponentProps = {};
 
@@ -23,9 +34,44 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
   );
 
   const now = new Date();
+  const suspects: INestDictionary<IDictionary> = peopleData;
 
   function deselectLocation() {
     dispatch(selectLocation({}));
+  }
+
+  function buildPeopleList(people: string) {
+    const peopleList = people.split(",");
+    const items = peopleList.map((i: string) => {
+      if (i) {
+        return (
+          <ListGroup.Item>
+            <Row>
+              <Col xs={1}>
+                {suspects[i].sex == "m" ? (
+                  <BsGenderMale
+                    style={{ color: "gray" }}
+                    title="gender: male"
+                  />
+                ) : (
+                  <BsGenderFemale
+                    style={{ color: "gray" }}
+                    title="gender: male"
+                  />
+                )}{" "}
+              </Col>
+              <Col>
+                {suspects[i].label} <br />
+                <small>
+                  <i>{suspects[i].occupation_type}</i>
+                </small>
+              </Col>
+            </Row>
+          </ListGroup.Item>
+        );
+      }
+    });
+    return <ListGroup variant="flush">{items}</ListGroup>;
   }
 
   return (
@@ -56,7 +102,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
         >
           <span></span>
         </div>
-        <div id="section5">
+        <div id="section5" style={{ marginBottom: "80px" }}>
           <span>
             <b>Location details</b>
           </span>
@@ -94,13 +140,19 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
               </Card.Header>
               <Card.Body>
                 <Card.Subtitle className="mb-1 text-muted">
-                  <small>residences in location:</small>
+                  <small>residences in location</small>
                 </Card.Subtitle>
-                <Card.Title className="mb-3">
+                <Card.Title className="mb-4">
                   {getResidenceNames(selectedLocation["residence_id"] as string)
                     .join(" • ")
                     .slice(0, -3)}
                 </Card.Title>
+                <Card.Subtitle className="mb-1 text-muted">
+                  <small>people</small>
+                </Card.Subtitle>
+                <Card.Text>
+                  {buildPeopleList(selectedLocation["name"] as string)}
+                </Card.Text>
               </Card.Body>
             </Card>
           ) : (

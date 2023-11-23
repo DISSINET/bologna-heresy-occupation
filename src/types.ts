@@ -23,3 +23,11 @@ export class Location {
   undef_heresy?: number = 0;
   undef_occ?: number = 0;
 }
+
+export interface INestDictionary<T> {
+  [index: string]: T;
+}
+
+export interface IDictionary {
+  [index: string]: string | number | null;
+}
