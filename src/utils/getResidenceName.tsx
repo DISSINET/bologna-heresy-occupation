@@ -4,7 +4,7 @@ export default function getResidenceNames(ids: string) {
   let idsList = ids.split(",");
   let idsSet = new Set(idsList);
   idsList = Array.from(idsSet);
-  const output = idsList.map((e) => getResidenceName(e)).join("; ");
+  const output = idsList.map((e) => getResidenceName(e))
   return output;
 }
 

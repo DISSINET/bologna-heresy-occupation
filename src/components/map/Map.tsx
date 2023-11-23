@@ -89,7 +89,7 @@ const MapComponent = ({}): JSX.Element => {
         controller={true}
         layers={layers}
         getTooltip={({ object }) =>
-          object && `${getResidenceNames(object.residence_id)}`
+          object && `${getResidenceNames(object.residence_id).join("\n")}`
         }
         getCursor={({ isDragging }) => (isDragging ? "arrow" : "arrow")}
       />

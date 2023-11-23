@@ -93,14 +93,14 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 </span>
               </Card.Header>
               <Card.Body>
-                <Card.Title>
-                  {getResidenceNames(
-                    selectedLocation["residence_id"] as string
-                  )}
-                </Card.Title>
-                <Card.Subtitle className="mb-3 text-muted">
-                  Subtitle
+                <Card.Subtitle className="mb-1 text-muted">
+                  <small>residences in location:</small>
                 </Card.Subtitle>
+                <Card.Title className="mb-3">
+                  {getResidenceNames(selectedLocation["residence_id"] as string)
+                    .join(" • ")
+                    .slice(0, -3)}
+                </Card.Title>
               </Card.Body>
             </Card>
           ) : (
