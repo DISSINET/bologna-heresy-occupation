@@ -2,6 +2,7 @@ import { useState } from "react";
 import Hero from "./Hero";
 import { useAppSelector, useAppDispatch } from "./../../app/hooks";
 import {
+  Badge,
   ListGroup,
   Container,
   Modal,
@@ -60,11 +61,43 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                   />
                 )}{" "}
               </Col>
-              <Col>
+              <Col style={{ cursor: "default" }}>
                 {suspects[i].label} <br />
-                <small>
+                <small title="occupation type">
                   <i>{suspects[i].occupation_type}</i>
-                </small>
+                </small>{" "}
+                {suspects[i].cathar_milieu && suspects[i].cathar_milieu != 0 ? (
+                  <small title="religious affiliation">
+                    <Badge bg="cathar">{"cathar milieu"}</Badge>
+                  </small>
+                ) : (
+                  ""
+                )}{" "}
+                {suspects[i].apostolic_milieu &&
+                suspects[i].apostolic_milieu != 0 ? (
+                  <small title="religious affiliation">
+                    <Badge bg="apostolic">{"apostolic milieu"}</Badge>
+                  </small>
+                ) : (
+                  ""
+                )}{" "}
+                {suspects[i].other_heterodoxy &&
+                suspects[i].other_heterodoxy != 0 ? (
+                  <small title="religious affiliation">
+                    <Badge bg="secondary">{"other heterodoxy"}</Badge>
+                  </small>
+                ) : (
+                  ""
+                )}{" "}
+                <small title="position in trial">
+                  <Badge
+                    bg="light"
+                    text="dark"
+                    style={{ border: "1px solid lightgray" }}
+                  >
+                    {suspects[i].deponent}
+                  </Badge>
+                </small>{" "}
               </Col>
             </Row>
           </ListGroup.Item>
