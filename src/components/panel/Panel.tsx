@@ -154,6 +154,24 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
               <option value="sex">sex</option>
             </Form.Select>
           </InputGroup>
+
+          <div className="mb-3">
+            <Form.Check
+              inline
+              label="deponent"
+              name="deponent"
+              type={"checkbox"}
+              id={"1"}
+            />
+            <Form.Check
+              inline
+              name="non-deponent"
+              label="non-deponent"
+              type={"checkbox"}
+              id={"2"}
+            />
+          </div>
+
           <InputGroup className="mb-2 mt-1" size="sm">
             <InputGroup.Text id="symbol-structure">
               Symbol structure shows
