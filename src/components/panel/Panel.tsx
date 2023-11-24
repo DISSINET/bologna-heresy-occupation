@@ -4,10 +4,11 @@ import { useAppSelector, useAppDispatch } from "./../../app/hooks";
 import {
   Badge,
   ListGroup,
-  Container,
   Modal,
   Button,
   CloseButton,
+  InputGroup,
+  Form,
   Row,
   Col,
 } from "react-bootstrap";
@@ -15,7 +16,7 @@ import { GoLocation } from "react-icons/go";
 import { BsGenderMale, BsGenderFemale } from "react-icons/bs";
 import { BsCheckLg, BsListUl } from "react-icons/bs";
 import { BiLinkExternal } from "react-icons/bi";
-import { selectLocation } from "../MainSlice";
+import { selectLocation, setSizeShows, setStructureShows } from "../MainSlice";
 import packageJson from "../../../package.json";
 import { Card } from "react-bootstrap";
 import getResidenceNames from "../../utils/getResidenceName";
@@ -33,12 +34,20 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
   const selectedLocation = useAppSelector(
     (state) => state.main.selectedLocation
   );
+  const sizeShows = useAppSelector((state) => state.main.sizeShows);
+  const structureShows = useAppSelector((state) => state.main.structureShows);
 
   const now = new Date();
   const suspects: INestDictionary<IDictionary> = peopleData;
 
   function deselectLocation() {
     dispatch(selectLocation({}));
+  }
+  function changeSizeShows(e: any) {
+    dispatch(setSizeShows(e.target.value));
+  }
+  function changeStructureShows(e: any) {
+    dispatch(setStructureShows(e.target.value));
   }
 
   function buildPeopleList(people: string) {
@@ -127,15 +136,39 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
           gap: "20px",
         }}
       >
-        <div
-          id="legend"
-          style={{
-            marginBottom: "60px",
-          }}
-        >
-          <span></span>
+        <div id="filter">
+          <span>
+            <b>Filtering and Legend</b>
+          </span>
+          <br />
+          <InputGroup className="mb-2 mt-1" size="sm">
+            <InputGroup.Text id="symbol-size">
+              Symbol size shows
+            </InputGroup.Text>
+            <Form.Select
+              title="select symbol size value"
+              value={sizeShows}
+              onChange={(e) => changeSizeShows(e)}
+            >
+              <option value="pos">position in trial</option>
+              <option value="sex">sex</option>
+            </Form.Select>
+          </InputGroup>
+          <InputGroup className="mb-2 mt-1" size="sm">
+            <InputGroup.Text id="symbol-structure">
+              Symbol structure shows
+            </InputGroup.Text>
+            <Form.Select
+              title="select symbol structure value"
+              value={structureShows}
+              onChange={(e) => changeStructureShows(e)}
+            >
+              <option value="occ">occupation</option>
+              <option value="rel">religious affiliation</option>
+            </Form.Select>
+          </InputGroup>
         </div>
-        <div id="section5" style={{ marginBottom: "80px" }}>
+        <div id="locations" style={{ marginBottom: "80px" }}>
           <span>
             <b>Location details</b>
           </span>
