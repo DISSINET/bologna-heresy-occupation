@@ -29,5 +29,5 @@ export interface INestDictionary<T> {
 }
 
 export interface IDictionary {
-  [index: string]: string | number | null;
+  [index: string]: string | number | boolean | null;
 }

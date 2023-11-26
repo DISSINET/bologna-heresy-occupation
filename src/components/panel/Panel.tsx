@@ -16,7 +16,19 @@ import { GoLocation } from "react-icons/go";
 import { BsGenderMale, BsGenderFemale } from "react-icons/bs";
 import { BsCheckLg, BsListUl } from "react-icons/bs";
 import { BiLinkExternal } from "react-icons/bi";
-import { selectLocation, setSizeShows, setStructureShows } from "../MainSlice";
+import {
+  selectLocation,
+  setSizeShows,
+  setStructureShows,
+  changeSexDict,
+  resetSexDict,
+  changePosDict,
+  resetPosDict,
+  changeRelDict,
+  resetRelDict,
+  changeOccDict,
+  resetOccDict,
+} from "../MainSlice";
 import packageJson from "../../../package.json";
 import { Card } from "react-bootstrap";
 import getResidenceNames from "../../utils/getResidenceName";
@@ -39,6 +51,11 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
   const sizeShows = useAppSelector((state) => state.main.sizeShows);
   const structureShows = useAppSelector((state) => state.main.structureShows);
 
+  const sex = useAppSelector((state) => state.main.sex);
+  const pos = useAppSelector((state) => state.main.pos);
+  const rel = useAppSelector((state) => state.main.rel);
+  const occ = useAppSelector((state) => state.main.occ);
+
   const now = new Date();
   const suspects: INestDictionary<IDictionary> = peopleData;
 
@@ -47,9 +64,25 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
   }
   function changeSizeShows(e: any) {
     dispatch(setSizeShows(e.target.value));
+    dispatch(resetSexDict());
+    dispatch(resetPosDict());
   }
   function changeStructureShows(e: any) {
     dispatch(setStructureShows(e.target.value));
+    dispatch(resetRelDict());
+    dispatch(resetOccDict());
+  }
+  function setSex(e: any) {
+    dispatch(changeSexDict([e.target.id, !sex[e.target.id]]));
+  }
+  function setPos(e: any) {
+    dispatch(changePosDict([e.target.id, !pos[e.target.id]]));
+  }
+  function setRel(e: any) {
+    dispatch(changeRelDict([e.target.id, !rel[e.target.id]]));
+  }
+  function setOcc(e: any) {
+    dispatch(changeOccDict([e.target.id, !occ[e.target.id]]));
   }
 
   function buildPeopleList(people: string) {
@@ -158,17 +191,21 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
           </InputGroup>
           {sizeShows == "pos" ? (
             <div className="mb-3">
-              <Form.Check inline id={"1"}>
+              <Form.Check inline id={"dep"}>
                 <Form.Check.Input
+                  checked={pos.dep as any}
                   className={"check-secondary"}
                   type={"checkbox"}
+                  onChange={(e) => setPos(e)}
                 />
                 <Form.Check.Label>{"deponent"}</Form.Check.Label>
               </Form.Check>
-              <Form.Check inline id={"2"}>
+              <Form.Check inline id={"nondep"}>
                 <Form.Check.Input
+                  checked={pos.nondep as any}
                   className={"check-secondary"}
                   type={"checkbox"}
+                  onChange={(e) => setPos(e)}
                 />
                 <Form.Check.Label>{"non-deponent"}</Form.Check.Label>
               </Form.Check>
@@ -178,17 +215,21 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
           )}
           {sizeShows == "sex" ? (
             <div className="mb-3">
-              <Form.Check inline id={"1"}>
+              <Form.Check inline id={"male"}>
                 <Form.Check.Input
+                  checked={sex.male as any}
                   className={"check-secondary"}
                   type={"checkbox"}
+                  onChange={(e) => setSex(e)}
                 />
                 <Form.Check.Label>{"male"}</Form.Check.Label>
               </Form.Check>
-              <Form.Check inline id={"2"}>
+              <Form.Check inline id={"female"}>
                 <Form.Check.Input
+                  checked={sex.female as any}
                   className={"check-secondary"}
                   type={"checkbox"}
+                  onChange={(e) => setSex(e)}
                 />
                 <Form.Check.Label>{"female"}</Form.Check.Label>
               </Form.Check>
@@ -215,11 +256,12 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
           {structureShows == "occ"
             ? Occupations.map((o: any, i: number) => {
                 return (
-                  <Form.Check inline type={"checkbox"} id={`${i}`}>
+                  <Form.Check inline type={"checkbox"} id={o.id}>
                     <Form.Check.Input
-                      checked
+                      checked={occ[o.id] as any}
                       className={`check-${o.id}`}
                       type={"checkbox"}
+                      onChange={(e) => setOcc(e)}
                     />
                     <Form.Check.Label>{o.name}</Form.Check.Label>
                   </Form.Check>
@@ -229,11 +271,12 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
           {structureShows == "rel"
             ? Religions.map((r: any, i: number) => {
                 return (
-                  <Form.Check inline type={"checkbox"} id={`${i}`}>
+                  <Form.Check inline type={"checkbox"} id={r.id}>
                     <Form.Check.Input
-                      checked
+                      checked={rel[r.id] as any}
                       className={`check-${r.id}`}
                       type={"checkbox"}
+                      onChange={(e) => setRel(e)}
                     />
                     <Form.Check.Label>{r.name}</Form.Check.Label>
                   </Form.Check>
