@@ -22,6 +22,8 @@ import { Card } from "react-bootstrap";
 import getResidenceNames from "../../utils/getResidenceName";
 import peopleData from "../../data/people.json";
 import { INestDictionary, IDictionary } from "../../types";
+import { Religions } from "../../dicts/religion";
+import { Occupations } from "../../dicts/occupations";
 
 type PanelComponentProps = {};
 
@@ -154,23 +156,46 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
               <option value="sex">sex</option>
             </Form.Select>
           </InputGroup>
-
-          <div className="mb-3">
-            <Form.Check
-              inline
-              label="deponent"
-              name="deponent"
-              type={"checkbox"}
-              id={"1"}
-            />
-            <Form.Check
-              inline
-              name="non-deponent"
-              label="non-deponent"
-              type={"checkbox"}
-              id={"2"}
-            />
-          </div>
+          {sizeShows == "pos" ? (
+            <div className="mb-3">
+              <Form.Check inline id={"1"}>
+                <Form.Check.Input
+                  className={"check-secondary"}
+                  type={"checkbox"}
+                />
+                <Form.Check.Label>{"deponent"}</Form.Check.Label>
+              </Form.Check>
+              <Form.Check inline id={"2"}>
+                <Form.Check.Input
+                  className={"check-secondary"}
+                  type={"checkbox"}
+                />
+                <Form.Check.Label>{"non-deponent"}</Form.Check.Label>
+              </Form.Check>
+            </div>
+          ) : (
+            ""
+          )}
+          {sizeShows == "sex" ? (
+            <div className="mb-3">
+              <Form.Check inline id={"1"}>
+                <Form.Check.Input
+                  className={"check-secondary"}
+                  type={"checkbox"}
+                />
+                <Form.Check.Label>{"male"}</Form.Check.Label>
+              </Form.Check>
+              <Form.Check inline id={"2"}>
+                <Form.Check.Input
+                  className={"check-secondary"}
+                  type={"checkbox"}
+                />
+                <Form.Check.Label>{"female"}</Form.Check.Label>
+              </Form.Check>
+            </div>
+          ) : (
+            ""
+          )}
 
           <InputGroup className="mb-2 mt-1" size="sm">
             <InputGroup.Text id="symbol-structure">
@@ -186,6 +211,37 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
             </Form.Select>
           </InputGroup>
         </div>
+        <div className="mb-3">
+          {structureShows == "occ"
+            ? Occupations.map((o: any, i: number) => {
+                return (
+                  <Form.Check inline type={"checkbox"} id={`${i}`}>
+                    <Form.Check.Input
+                      checked
+                      className={`check-${o.id}`}
+                      type={"checkbox"}
+                    />
+                    <Form.Check.Label>{o.name}</Form.Check.Label>
+                  </Form.Check>
+                );
+              })
+            : ""}
+          {structureShows == "rel"
+            ? Religions.map((r: any, i: number) => {
+                return (
+                  <Form.Check inline type={"checkbox"} id={`${i}`}>
+                    <Form.Check.Input
+                      checked
+                      className={`check-${r.id}`}
+                      type={"checkbox"}
+                    />
+                    <Form.Check.Label>{r.name}</Form.Check.Label>
+                  </Form.Check>
+                );
+              })
+            : ""}
+        </div>
+
         <div id="locations" style={{ marginBottom: "80px" }}>
           <span>
             <b>Location details</b>
