@@ -322,9 +322,16 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 </span>
               </Card.Header>
               <Card.Body>
-                <Card.Subtitle className="mb-1 text-muted">
-                  <small>residences in location</small>
-                </Card.Subtitle>
+                {getResidenceNames(selectedLocation["residence_id"] as string)
+                  .length > 2 ? (
+                  <Card.Subtitle className="mb-1 text-muted">
+                    <small>residences in location</small>
+                  </Card.Subtitle>
+                ) : (
+                  <Card.Subtitle className="mb-1 text-muted">
+                    <small>residence</small>
+                  </Card.Subtitle>
+                )}
                 <Card.Title className="mb-4">
                   {getResidenceNames(selectedLocation["residence_id"] as string)
                     .join(" • ")
