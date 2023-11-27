@@ -106,10 +106,14 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 )}{" "}
               </Col>
               <Col style={{ cursor: "default" }}>
-                {suspects[i].label} <br />
+                {suspects[i].label}
                 <small title="occupation type">
-                  <i>{suspects[i].occupation_type}</i>
+                  <i>
+                    {suspects[i].occupation_type &&
+                      `, ${suspects[i].occupation_type}`}
+                  </i>
                 </small>{" "}
+                <br />
                 {suspects[i].cathar_milieu && suspects[i].cathar_milieu != 0 ? (
                   <small title="religious affiliation">
                     <Badge bg="cathar">{"cathar milieu"}</Badge>
