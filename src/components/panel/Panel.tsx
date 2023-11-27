@@ -116,7 +116,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 <br />
                 {suspects[i].cathar_milieu && suspects[i].cathar_milieu != 0 ? (
                   <small title="religious affiliation">
-                    <Badge bg="cathar">{"cathar milieu"}</Badge>
+                    <Badge bg="cathar">{"Cathar milieu"}</Badge>
                   </small>
                 ) : (
                   ""
@@ -124,7 +124,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 {suspects[i].apostolic_milieu &&
                 suspects[i].apostolic_milieu != 0 ? (
                   <small title="religious affiliation">
-                    <Badge bg="apostolic">{"apostolic milieu"}</Badge>
+                    <Badge bg="apostolic">{"Apostolic milieu"}</Badge>
                   </small>
                 ) : (
                   ""
