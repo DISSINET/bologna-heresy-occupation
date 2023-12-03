@@ -8,6 +8,7 @@ import MapScale from "./MapScale";
 import { selectLocation } from "./../MainSlice";
 import locations from "../../data/locations.json";
 import getResidenceNames from "../../utils/getResidenceName";
+import PieChartLayer from "../../maplib/PieChartLayer";
 
 const MapComponent = ({}): JSX.Element => {
   const mapState = useAppSelector((state) => state.map);
@@ -49,13 +50,12 @@ const MapComponent = ({}): JSX.Element => {
     },
   });
 
-  const places = new ScatterplotLayer({
+  const places = new PieChartLayer({
     id: "places",
     data: locations,
     pickable: true,
     stroked: true,
     filled: true,
-    getElevation: 30,
     getPosition: (d: any) => [
       d.residence_x_coordinates,
       d.residence_y_coordinates,
@@ -63,12 +63,12 @@ const MapComponent = ({}): JSX.Element => {
     opacity: 0.3,
     radiusMinPixels: mapState.zoom * 0.5,
     radiusMaxPixels: mapState.zoom * 5,
-    //getRadius: (d) => parseInt(d.female) * 100,
+    radiusScale: 20,
+    getRadius: (d) => (parseInt(d.female) + parseInt(d.male)) * 10,
     lineWidthMinPixels: 1,
     getFillColor: (d) => [3, 190, 3],
     getLineColor: (d) => [2, 20, 30],
     // hover buffer around object
-    pickingRadius: 50,
     //onHover: TODO set shadow or something
 
     onClick: (object) => object && dispatchSelectedLocation(object.object),
