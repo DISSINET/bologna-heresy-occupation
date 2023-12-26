@@ -9,18 +9,11 @@ const Layout = ({}): JSX.Element => {
   return (
     <Container fluid style={{ padding: 0 }}>
       <Row>
-        <Col
-          sm="12"
-          md="9"
-          style={{
-            padding: 0,
-            height: "100%",
-            bottom: 0,
-            left: 0,
-            right: 0,
-          }}
-        >
-          <MapComponent />
+        <Col sm="12" md="9">
+          <Row>
+            <MapComponent />
+          </Row>
+          <Row></Row>
         </Col>
         <Col
           md="3"

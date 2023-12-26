@@ -94,7 +94,7 @@ const MapScale = ({ definitionLayer }: MapScaleProps): JSX.Element => {
   return (
     <div
       style={{
-        bottom: "11px",
+        top: "45%",
         left: "11px",
         zIndex: 10000,
         position: "absolute",

@@ -88,7 +88,6 @@ const MapComponent = ({}): JSX.Element => {
   return (
     <div onContextMenu={(evt) => evt.preventDefault()}>
       <MapControls />
-      <MapScale definitionLayer={cityLevel} />
       <DeckGL
         viewState={mapState}
         onViewStateChange={(e: any) => dispatchMapState(e.viewState)}
@@ -98,7 +97,11 @@ const MapComponent = ({}): JSX.Element => {
           object && `${getResidenceNames(object.residence_id).join("\n")}`
         }
         getCursor={({ isDragging }) => (isDragging ? "arrow" : "arrow")}
+        style={{
+          height: "50%",
+        }}
       />
+      <MapScale definitionLayer={cityLevel} />
     </div>
   );
 };
