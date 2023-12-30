@@ -5,9 +5,10 @@ import { useAppSelector } from "./../../app/hooks";
 // TODO parametrized positoning, max width and other values
 type MapScaleProps = {
   definitionLayer: any;
+  top: string;
 };
 
-const MapScale = ({ definitionLayer }: MapScaleProps): JSX.Element => {
+const MapScale = ({ definitionLayer, top }: MapScaleProps): JSX.Element => {
   const zoom = useAppSelector((state) => state.map.zoom);
   const latitude = useAppSelector((state) => state.map.latitude);
   const minZoom = useAppSelector((state) => state.map.minZoom);
@@ -94,7 +95,7 @@ const MapScale = ({ definitionLayer }: MapScaleProps): JSX.Element => {
   return (
     <div
       style={{
-        top: "45%",
+        top: top,
         left: "11px",
         zIndex: 10000,
         position: "absolute",
