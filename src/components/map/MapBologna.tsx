@@ -2,15 +2,15 @@ import DeckGL from "@deck.gl/react/typed";
 import { BitmapLayer, ScatterplotLayer } from "@deck.gl/layers/typed";
 import { TileLayer } from "@deck.gl/geo-layers/typed";
 import { useAppSelector, useAppDispatch } from "./../../app/hooks";
-import { updateMapState } from "./MapSlice";
-import MapControls from "./MapControls";
-import MapScale from "./MapScale";
+import { updateMapState } from "./MapSliceBologna";
+import MapControlsBologna from "./MapControlsBologna";
+import MapScaleBologna from "./MapScaleBologna";
 import { selectLocation } from "./../MainSlice";
 import locations from "../../data/locations.json";
 import getResidenceNames from "../../utils/getResidenceName";
 
-const MapComponent = ({}): JSX.Element => {
-  const mapState = useAppSelector((state) => state.map);
+const MapComponentBologna = ({}): JSX.Element => {
+  const mapState = useAppSelector((state) => state.bologna);
   const dispatch = useAppDispatch();
 
   function dispatchMapState(val: any) {
@@ -20,7 +20,7 @@ const MapComponent = ({}): JSX.Element => {
     dispatch(selectLocation(loc));
   }
 
-  const cityLevel = new TileLayer({
+  const city = new TileLayer({
     data: [
       "https://a.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
       "https://b.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
@@ -54,8 +54,8 @@ const MapComponent = ({}): JSX.Element => {
     },
   });
 
-  const places = new ScatterplotLayer({
-    id: "places",
+  const plcs = new ScatterplotLayer({
+    id: "plcs",
     data: locations,
     pickable: true,
     stroked: true,
@@ -84,10 +84,10 @@ const MapComponent = ({}): JSX.Element => {
     },
   });
 
-  const layers = [cityLevel, places];
+  const layers = [city, plcs];
   return (
     <div onContextMenu={(evt) => evt.preventDefault()}>
-      <MapControls />
+      <MapControlsBologna />
       <DeckGL
         viewState={mapState}
         onViewStateChange={(e: any) => dispatchMapState(e.viewState)}
@@ -98,12 +98,14 @@ const MapComponent = ({}): JSX.Element => {
         }
         getCursor={({ isDragging }) => (isDragging ? "arrow" : "arrow")}
         style={{
+          top: "50%",
           height: "50%",
+          width: "50%",
         }}
       />
-      <MapScale definitionLayer={cityLevel} top={"45%"} />
+      <MapScaleBologna definitionLayer={city} top={"95%"} />
     </div>
   );
 };
 
-export default MapComponent;
+export default MapComponentBologna;
