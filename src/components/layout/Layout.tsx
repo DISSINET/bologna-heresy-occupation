@@ -15,7 +15,7 @@ const Layout = ({}): JSX.Element => {
             <MapComponent />
           </Row>
           <Row>
-            <Col> 
+            <Col>
               <MapComponentBologna />
             </Col>
             <Col></Col>

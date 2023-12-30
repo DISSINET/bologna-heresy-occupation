@@ -88,6 +88,17 @@ const MapComponent = ({}): JSX.Element => {
   return (
     <div onContextMenu={(evt) => evt.preventDefault()}>
       <MapControls />
+      <div
+        className="mt-2"
+        style={{
+          position: "absolute",
+          left: "50px",
+          width: "30%",
+          zIndex: 1000,
+        }}
+      >
+        <h5>Locations outside Bologna</h5>
+      </div>
       <DeckGL
         viewState={mapState}
         onViewStateChange={(e: any) => dispatchMapState(e.viewState)}
