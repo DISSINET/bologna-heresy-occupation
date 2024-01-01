@@ -64,10 +64,10 @@ const MapComponent = ({}): JSX.Element => {
     opacity: 0.3,
     radiusMinPixels: mapState.zoom * 0.5,
     radiusMaxPixels: mapState.zoom * 5,
-    radiusScale: 20,
+    radiusScale: 100,
     getRadius: (d) => (parseInt(d.female) + parseInt(d.male)) * 10,
     lineWidthMinPixels: 1,
-    getFillColor: (d) => [3, 190, 3],
+    getFillColor: (d) => [200, 50, 200],
     getLineColor: (d) => [2, 20, 30],
     // hover buffer around object
     //onHover: TODO set shadow or something

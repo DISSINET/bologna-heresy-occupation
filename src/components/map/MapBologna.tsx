@@ -65,7 +65,7 @@ const MapComponentBologna = ({}): JSX.Element => {
     radiusMaxPixels: mapState.zoom * 5,
     getRadius: (d) => (parseInt(d.female) + parseInt(d.male)) * 10,
     lineWidthMinPixels: 1,
-    getFillColor: (d) => [3, 190, 3],
+    getFillColor: (d) => [200, 50, 200],
     getLineColor: (d) => [2, 20, 30],
     // hover buffer around object
     pickingRadius: 50,
