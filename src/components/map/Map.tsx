@@ -1,5 +1,9 @@
 import DeckGL from "@deck.gl/react/typed";
-import { BitmapLayer, ScatterplotLayer } from "@deck.gl/layers/typed";
+import {
+  BitmapLayer,
+  ScatterplotLayer,
+  GeoJsonLayer,
+} from "@deck.gl/layers/typed";
 import { TileLayer } from "@deck.gl/geo-layers/typed";
 import { useAppSelector, useAppDispatch } from "./../../app/hooks";
 import { updateMapState } from "./MapSlice";
@@ -7,6 +11,7 @@ import MapControls from "./MapControls";
 import MapScale from "./MapScale";
 import { selectLocation } from "./../MainSlice";
 import locations from "../../data/locations-out.json";
+import bolbox from "../../data/bologna.json";
 import getResidenceNames from "../../utils/getResidenceName";
 import PieChartLayer from "../../maplib/PieChartLayer";
 
@@ -75,7 +80,23 @@ const MapComponent = ({}): JSX.Element => {
     },
   });
 
-  const layers = [cityLevel, places];
+  const bolognabox = new GeoJsonLayer({
+    id: "bolognabox",
+    bolbox,
+    pickable: true,
+    stroked: false,
+    filled: true,
+    extruded: true,
+    pointType: "circle",
+    lineWidthScale: 20,
+    lineWidthMinPixels: 2,
+    getFillColor: [160, 160, 180, 200],
+    getPointRadius: 100,
+    getLineWidth: 1,
+    getElevation: 30,
+  });
+
+  const layers = [cityLevel, places, bolognabox];
   return (
     <div onContextMenu={(evt) => evt.preventDefault()}>
       <MapControls />
