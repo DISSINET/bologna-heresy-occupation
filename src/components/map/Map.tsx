@@ -6,7 +6,7 @@ import { updateMapState } from "./MapSlice";
 import MapControls from "./MapControls";
 import MapScale from "./MapScale";
 import { selectLocation } from "./../MainSlice";
-import locations from "../../data/locations.json";
+import locations from "../../data/locations-out.json";
 import getResidenceNames from "../../utils/getResidenceName";
 import PieChartLayer from "../../maplib/PieChartLayer";
 
