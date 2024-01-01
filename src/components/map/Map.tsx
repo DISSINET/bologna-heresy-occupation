@@ -23,12 +23,8 @@ const MapComponent = ({}): JSX.Element => {
 
   const cityLevel = new TileLayer({
     data: [
-      "https://a.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
-      "https://b.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
-      "https://c.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
-      "https://d.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
+      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
     ],
-
     maxRequests: 20,
     pickable: true,
     minZoom: 0,
@@ -89,9 +85,13 @@ const MapComponent = ({}): JSX.Element => {
           position: "absolute",
           left: "50px",
           zIndex: 1000,
+          backgroundColor: "white",
+          padding: "5px",
         }}
       >
-        <h5>Locations outside Bologna</h5>
+        <h5>
+          <b>Locations outside Bologna</b>
+        </h5>
       </div>
       <DeckGL
         viewState={mapState}

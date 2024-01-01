@@ -17,7 +17,7 @@ const initialState: MapStateBologna = {
   zoom: 13,
   pitch: 0,
   bearing: 0,
-  minZoom: 10,
+  minZoom: 13,
   maxZoom: 15,
   transitionDuration: 500,
   //transitionEasing: TODO

@@ -27,16 +27,11 @@ const MapComponentBologna = ({}): JSX.Element => {
       "https://c.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{r}.png",
       "https://d.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{r}.png",
     ],
-    /*
-    data: [
-      "https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}",
-    ],
-    data: ["https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"],
-    */
     maxRequests: 20,
     pickable: true,
     minZoom: 0,
     maxZoom: 15,
+    desaturate: 1,
     tileSize: 256,
     // zoomOffset: devicePixelRatio === 1 ? -1 : 0,
     renderSubLayers: (props) => {
@@ -68,7 +63,7 @@ const MapComponentBologna = ({}): JSX.Element => {
     opacity: 0.3,
     radiusMinPixels: mapState.zoom * 0.5,
     radiusMaxPixels: mapState.zoom * 5,
-    //getRadius: (d) => parseInt(d.female) * 100,
+    getRadius: (d) => (parseInt(d.female) + parseInt(d.male)) * 10,
     lineWidthMinPixels: 1,
     getFillColor: (d) => [3, 190, 3],
     getLineColor: (d) => [2, 20, 30],
@@ -95,9 +90,13 @@ const MapComponentBologna = ({}): JSX.Element => {
           left: "50px",
           top: "50%",
           zIndex: 1000,
+          backgroundColor: "white",
+          padding: "5px",
         }}
       >
-        <h5>Bologna</h5>
+        <h5>
+          <b>Bologna</b>
+        </h5>
       </div>
       <DeckGL
         viewState={mapState}

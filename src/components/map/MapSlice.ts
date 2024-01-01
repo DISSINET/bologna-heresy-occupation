@@ -17,7 +17,7 @@ const initialState: MapState = {
   zoom: 7,
   pitch: 0,
   bearing: 0,
-  minZoom: 3,
+  minZoom: 4,
   maxZoom: 15,
   transitionDuration: 500,
   //transitionEasing: TODO
