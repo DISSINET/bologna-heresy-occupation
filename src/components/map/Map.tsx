@@ -27,12 +27,7 @@ const MapComponent = ({}): JSX.Element => {
       "https://c.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
       "https://d.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
     ],
-    /*
-    data: [
-      "https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}",
-    ],
-    data: ["https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"],
-    */
+
     maxRequests: 20,
     pickable: true,
     minZoom: 0,
@@ -93,7 +88,6 @@ const MapComponent = ({}): JSX.Element => {
         style={{
           position: "absolute",
           left: "50px",
-          width: "30%",
           zIndex: 1000,
         }}
       >
