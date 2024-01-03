@@ -9,6 +9,7 @@ import { selectLocation } from "./../MainSlice";
 import locations from "../../data/locations.json";
 import getResidenceNames from "../../utils/getResidenceName";
 import PieChartLayer from "../../maplib/PieChartLayer";
+import { InputGroup } from "react-bootstrap";
 
 const MapComponentBologna = ({}): JSX.Element => {
   const mapState = useAppSelector((state) => state.bologna);
@@ -119,13 +120,17 @@ const MapComponentBologna = ({}): JSX.Element => {
           left: "50px",
           top: "50%",
           zIndex: 1000,
-          backgroundColor: "white",
           padding: "5px",
         }}
       >
-        <h5>
-          <b>Bologna</b>
-        </h5>
+        <InputGroup>
+          <InputGroup.Text className="boxShadow">
+            <b>Bologna</b>
+          </InputGroup.Text>
+          <InputGroup.Text className="boxShadow">
+            <small>238 people</small>
+          </InputGroup.Text>
+        </InputGroup>
       </div>
       <DeckGL
         viewState={mapState}

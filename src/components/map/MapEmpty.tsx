@@ -6,6 +6,7 @@ import { selectLocation } from "./../MainSlice";
 import locations from "../../data/locations-none.json";
 import getResidenceNames from "../../utils/getResidenceName";
 import PieChartLayer from "../../maplib/PieChartLayer";
+import InputGroup from "react-bootstrap/InputGroup";
 
 const MapComponentEmpty = ({}): JSX.Element => {
   const mapState = {
@@ -122,14 +123,18 @@ const MapComponentEmpty = ({}): JSX.Element => {
           left: "50%",
           top: "50%",
           zIndex: 1000,
-          backgroundColor: "white",
           padding: "5px",
-          paddingLeft: "25px",
+          paddingLeft: "15px",
         }}
       >
-        <h5>
-          <b>Unspecified location</b>
-        </h5>
+        <InputGroup>
+          <InputGroup.Text className="boxShadowThin">
+            <b>Unspecified location</b>
+          </InputGroup.Text>
+          <InputGroup.Text className="boxShadowThin">
+            <small>238 people</small>
+          </InputGroup.Text>
+        </InputGroup>
       </div>
       <DeckGL
         viewState={mapState}

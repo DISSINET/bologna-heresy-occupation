@@ -2,6 +2,13 @@
   font-family: Muni;
 }
 
+.boxShadow {
+  box-shadow: 0 10px 20px hsla(0, 0%, 0%, 0.15), 0 3px 6px hsla(0, 0%, 0%, 0.1);
+}
+.boxShadowThin {
+  box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.2);
+}
+
 .bg-cathar {
   background-color: #4098d7 !important;
 }
