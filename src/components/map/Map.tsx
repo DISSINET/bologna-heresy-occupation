@@ -1,9 +1,5 @@
 import DeckGL from "@deck.gl/react/typed";
-import {
-  BitmapLayer,
-  ScatterplotLayer,
-  GeoJsonLayer,
-} from "@deck.gl/layers/typed";
+import { BitmapLayer, GeoJsonLayer } from "@deck.gl/layers/typed";
 import { TileLayer } from "@deck.gl/geo-layers/typed";
 import { useAppSelector, useAppDispatch } from "./../../app/hooks";
 import { updateMapState } from "./MapSlice";
@@ -25,6 +21,9 @@ const MapComponent = ({}): JSX.Element => {
   function dispatchSelectedLocation(loc: any) {
     dispatch(selectLocation(loc));
   }
+  const selectedLocation = useAppSelector(
+    (state) => state.main.selectedLocation
+  );
 
   const cityLevel = new TileLayer({
     data: [
@@ -51,6 +50,13 @@ const MapComponent = ({}): JSX.Element => {
     },
   });
 
+  function getHiglight(d: any): number {
+    if (selectedLocation["residence_id"] == d.residence_id) {
+      return mapState.zoom * 10;
+    }
+    return mapState.zoom * 3;
+  }
+
   const places = new PieChartLayer({
     id: "places",
     data: locations,
@@ -65,9 +71,10 @@ const MapComponent = ({}): JSX.Element => {
     radiusMinPixels: 5,
     radiusScale: 100,
     getRadius: (d) => (parseInt(d.female) + parseInt(d.male)) * 10,
-    lineWidthMinPixels: 1,
+    getLineWidth: (d) => getHiglight(d),
     getFillColor: (d) => [200, 50, 200],
     getLineColor: (d) => [2, 20, 30],
+    lineWidthScale: 20,
     // hover buffer around object
     //onHover: TODO set shadow or something
 
@@ -76,6 +83,10 @@ const MapComponent = ({}): JSX.Element => {
     // prevent Z-fighting in tilted view
     parameters: {
       depthTest: false,
+    },
+    // like useEffect <function>:<value change that triggers rerun>
+    updateTriggers: {
+      getLineWidth: [selectedLocation],
     },
   });
 

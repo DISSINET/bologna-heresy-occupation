@@ -1,5 +1,5 @@
 import DeckGL from "@deck.gl/react/typed";
-import { BitmapLayer, ScatterplotLayer } from "@deck.gl/layers/typed";
+import { BitmapLayer } from "@deck.gl/layers/typed";
 import { TileLayer } from "@deck.gl/geo-layers/typed";
 import { useAppSelector, useAppDispatch } from "./../../app/hooks";
 import { updateMapState } from "./MapSliceBologna";
@@ -8,6 +8,7 @@ import MapScaleBologna from "./MapScaleBologna";
 import { selectLocation } from "./../MainSlice";
 import locations from "../../data/locations.json";
 import getResidenceNames from "../../utils/getResidenceName";
+import PieChartLayer from "../../maplib/PieChartLayer";
 
 const MapComponentBologna = ({}): JSX.Element => {
   const mapState = useAppSelector((state) => state.bologna);
@@ -18,6 +19,16 @@ const MapComponentBologna = ({}): JSX.Element => {
   }
   function dispatchSelectedLocation(loc: any) {
     dispatch(selectLocation(loc));
+  }
+  const selectedLocation = useAppSelector(
+    (state) => state.main.selectedLocation
+  );
+
+  function getHiglight(d: any): number {
+    if (selectedLocation["residence_id"] == d.residence_id) {
+      return mapState.zoom * 2;
+    }
+    return 1;
   }
 
   const city = new TileLayer({
@@ -49,25 +60,25 @@ const MapComponentBologna = ({}): JSX.Element => {
     },
   });
 
-  const plcs = new ScatterplotLayer({
+  const plcs = new PieChartLayer({
     id: "plcs",
     data: locations,
     pickable: true,
     stroked: true,
     filled: true,
-    getElevation: 30,
     getPosition: (d: any) => [
       d.residence_x_coordinates,
       d.residence_y_coordinates,
     ],
     opacity: 0.3,
     radiusMinPixels: 5,
+    radiusScale: 1.2,
     getRadius: (d) => (parseInt(d.female) + parseInt(d.male)) * 10,
+    getLineWidth: (d) => getHiglight(d),
     lineWidthMinPixels: 1,
     getFillColor: (d) => [200, 50, 200],
     getLineColor: (d) => [2, 20, 30],
     // hover buffer around object
-    pickingRadius: 50,
     //onHover: TODO set shadow or something
 
     onClick: (object) => object && dispatchSelectedLocation(object.object),
@@ -75,6 +86,10 @@ const MapComponentBologna = ({}): JSX.Element => {
     // prevent Z-fighting in tilted view
     parameters: {
       depthTest: false,
+    },
+    // like useEffect <function>:<value change that triggers rerun>
+    updateTriggers: {
+      getLineWidth: [selectedLocation],
     },
   });
 
