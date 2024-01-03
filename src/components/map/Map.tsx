@@ -24,6 +24,9 @@ const MapComponent = ({}): JSX.Element => {
   const selectedLocation = useAppSelector(
     (state) => state.main.selectedLocation
   );
+  const sizeShows = useAppSelector((state) => state.main.sizeShows);
+  const sex = useAppSelector((state) => state.main.sex);
+  const pos = useAppSelector((state) => state.main.pos);
 
   const cityLevel = new TileLayer({
     data: [
@@ -57,6 +60,18 @@ const MapComponent = ({}): JSX.Element => {
     return mapState.zoom * 3;
   }
 
+  function getRadius(d: any): number {
+    if (sizeShows === "pos") {
+      let dep = pos.dep ? parseInt(d.dep) : 0;
+      let nondep = pos.nondep ? parseInt(d.non_dep) : 0;
+      return (dep + nondep) * 10;
+    } else {
+      let male = sex.male ? parseInt(d.male) : 0;
+      let female = sex.female ? parseInt(d.female) : 0;
+      return (male + female) * 10;
+    }
+  }
+
   const places = new PieChartLayer({
     id: "places",
     data: locations,
@@ -68,9 +83,8 @@ const MapComponent = ({}): JSX.Element => {
       d.residence_y_coordinates,
     ],
     opacity: 0.3,
-    radiusMinPixels: 5,
     radiusScale: 100,
-    getRadius: (d) => (parseInt(d.female) + parseInt(d.male)) * 10,
+    getRadius: (d) => getRadius(d),
     getLineWidth: (d) => getHiglight(d),
     getFillColor: (d) => [200, 50, 200],
     getLineColor: (d) => [2, 20, 30],
@@ -87,6 +101,7 @@ const MapComponent = ({}): JSX.Element => {
     // like useEffect <function>:<value change that triggers rerun>
     updateTriggers: {
       getLineWidth: [selectedLocation],
+      getRadius: [pos, sex, sizeShows],
     },
   });
 
