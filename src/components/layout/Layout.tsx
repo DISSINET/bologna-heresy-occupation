@@ -1,6 +1,7 @@
 import * as React from "react";
 import MapComponent from "./../map/Map";
 import MapComponentBologna from "./../map/MapBologna";
+import MapComponentEmpty from "./../map/MapEmpty";
 import PanelComponent from "./../panel/Panel";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -18,7 +19,9 @@ const Layout = ({}): JSX.Element => {
             <Col>
               <MapComponentBologna />
             </Col>
-            <Col></Col>
+            <Col>
+              <MapComponentEmpty />
+            </Col>
           </Row>
         </Col>
         <Col
