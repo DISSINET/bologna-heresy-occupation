@@ -342,7 +342,12 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                     .slice(0, -3)}
                 </Card.Title>
                 <Card.Subtitle className="mb-1 text-muted">
-                  <small>people</small>
+                  <small>
+                    people (
+                    {selectedLocation["name"] &&
+                      selectedLocation["name"].split(",").length}
+                    )
+                  </small>
                 </Card.Subtitle>
                 <Card.Text>
                   {buildPeopleList(selectedLocation["name"] as string)}

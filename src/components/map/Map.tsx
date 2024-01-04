@@ -61,6 +61,14 @@ const MapComponent = ({}): JSX.Element => {
     return mapState.zoom * 3;
   }
 
+  function countValues() {
+    let sum = 0;
+    locations.forEach((l) => {
+      sum = sum + l.male + l.female;
+    });
+    return sum;
+  }
+
   function getRadius(d: any): number {
     if (sizeShows === "pos") {
       let dep = pos.dep ? parseInt(d.dep) : 0;
@@ -139,7 +147,7 @@ const MapComponent = ({}): JSX.Element => {
             <b>Locations outside Bologna</b>
           </InputGroup.Text>
           <InputGroup.Text className="boxShadow">
-            <small>238 people</small>
+            <small>{countValues()} people</small>
           </InputGroup.Text>
         </InputGroup>
       </div>
