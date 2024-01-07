@@ -1,5 +1,5 @@
 import DeckGL from "@deck.gl/react/typed";
-import { BitmapLayer, GeoJsonLayer } from "@deck.gl/layers/typed";
+import { BitmapLayer, GeoJsonLayer, IconLayer } from "@deck.gl/layers/typed";
 import { TileLayer } from "@deck.gl/geo-layers/typed";
 import { useAppSelector, useAppDispatch } from "./../../app/hooks";
 import { updateMapState } from "./MapSlice";
@@ -81,7 +81,22 @@ const MapComponent = ({}): JSX.Element => {
     }
   }
 
-  const places = new PieChartLayer({
+  function createSVGIcon(idx: any, d: any) {
+    let size = getRadius(d);
+    return `
+    <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="${size / 2}" cy="${size / 2}" r="${size/2}" fill="rgb(${
+      idx * 20
+    }, 0, 0)" stroke="#fa1" stroke-width="2"/>
+    </svg>
+  `;
+  }
+
+  function svgToDataURL(svg: any) {
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+  }
+
+  const places = new IconLayer({
     id: "places",
     data: locations,
     pickable: true,
@@ -92,11 +107,16 @@ const MapComponent = ({}): JSX.Element => {
       d.residence_y_coordinates,
     ],
     opacity: 0.3,
-    radiusScale: 100,
-    getRadius: (d) => getRadius(d),
-    getLineWidth: (d) => getHiglight(d),
-    getFillColor: (d) => [200, 50, 200],
-    getLineColor: (d) => [2, 20, 30],
+    sizeScale: 1,
+    getIcon: (d, { index }) => ({
+      url: svgToDataURL(createSVGIcon(index, d)),
+      width: getRadius(d),
+      height: getRadius(d),
+    }),
+    getSize: (d) => getRadius(d),
+    //getLineWidth: (d) => getHiglight(d),
+    //getFillColor: (d) => [200, 50, 200],
+    //getLineColor: (d) => [2, 20, 30],
     lineWidthScale: 20,
     // hover buffer around object
     //onHover: TODO set shadow or something
@@ -110,7 +130,7 @@ const MapComponent = ({}): JSX.Element => {
     // like useEffect <function>:<value change that triggers rerun>
     updateTriggers: {
       getLineWidth: [selectedLocation],
-      getRadius: [pos, sex, sizeShows],
+      getSize: [pos, sex, sizeShows],
     },
   });
 
