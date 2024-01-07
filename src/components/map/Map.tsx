@@ -56,9 +56,9 @@ const MapComponent = ({}): JSX.Element => {
 
   function getHiglight(d: any): number {
     if (selectedLocation["residence_id"] == d.residence_id) {
-      return mapState.zoom * 10;
+      return 3;
     }
-    return mapState.zoom * 3;
+    return 1;
   }
 
   function countValues() {
@@ -83,11 +83,12 @@ const MapComponent = ({}): JSX.Element => {
 
   function createSVGIcon(idx: any, d: any) {
     let size = getRadius(d);
+    let line = getHiglight(d);
     return `
     <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="${size / 2}" cy="${size / 2}" r="${size/2}" fill="rgb(${
-      idx * 20
-    }, 0, 0)" stroke="#fa1" stroke-width="2"/>
+      <circle cx="${size / 2}" cy="${size / 2}" r="${
+      size / 2 - 3
+    }" fill="none" stroke="black" stroke-width="${line}"/>
     </svg>
   `;
   }
@@ -117,7 +118,6 @@ const MapComponent = ({}): JSX.Element => {
     //getLineWidth: (d) => getHiglight(d),
     //getFillColor: (d) => [200, 50, 200],
     //getLineColor: (d) => [2, 20, 30],
-    lineWidthScale: 20,
     // hover buffer around object
     //onHover: TODO set shadow or something
 
@@ -129,8 +129,8 @@ const MapComponent = ({}): JSX.Element => {
     },
     // like useEffect <function>:<value change that triggers rerun>
     updateTriggers: {
-      getLineWidth: [selectedLocation],
       getSize: [pos, sex, sizeShows],
+      getIcon: [selectedLocation],
     },
   });
 
