@@ -9,8 +9,9 @@ import { selectLocation } from "./../MainSlice";
 import locations from "../../data/locations-out.json";
 import bolbox from "../../data/bologna.json";
 import getResidenceNames from "../../utils/getResidenceName";
-import PieChartLayer from "../../maplib/PieChartLayer";
 import InputGroup from "react-bootstrap/InputGroup";
+import { Occupations } from "../../dicts/occupations";
+import { Religions } from "../../dicts/religion";
 
 const MapComponent = ({}): JSX.Element => {
   const mapState = useAppSelector((state) => state.map);
@@ -61,7 +62,7 @@ const MapComponent = ({}): JSX.Element => {
     return 1;
   }
 
-  function countValues() {
+  function countPeople() {
     let sum = 0;
     locations.forEach((l) => {
       sum = sum + l.male + l.female;
@@ -73,22 +74,45 @@ const MapComponent = ({}): JSX.Element => {
     if (sizeShows === "pos") {
       let dep = pos.dep ? parseInt(d.dep) : 0;
       let nondep = pos.nondep ? parseInt(d.non_dep) : 0;
-      return (dep + nondep) * 10;
+      return ((dep + nondep) * 10) + 5;
     } else {
       let male = sex.male ? parseInt(d.male) : 0;
       let female = sex.female ? parseInt(d.female) : 0;
-      return (male + female) * 10;
+      return ((male + female) * 10) + 5;
     }
+  }
+
+  function buidPieChartData(d: any) {
+    return { man: 12, free: 1, unknown: 5, qual: 8, sp: 3 };
   }
 
   function createSVGIcon(idx: any, d: any) {
     let size = getRadius(d);
     let line = getHiglight(d);
+    const data = buidPieChartData(d);
+    const circleLength = Math.PI * ((size / 4 - 3) * 2);
+    const totalValue = Object.values(data).reduce((a: any, b: any) => a + b, 0);
+    let spaceLeft = circleLength;
+
+    let circles = Object.keys(data).map((key: any) => {
+      let color = Occupations.filter((e) => e.id == key);
+
+      let output = `<circle cx="${size / 2}" cy="${size / 2}" r="${
+        size / 4 - 3
+      }" fill="none" stroke="${color[0].color}" stroke-width="${
+        size / 2
+      }" stroke-dasharray="${spaceLeft} ${circleLength}"/>`;
+
+      spaceLeft -= (data[`${key as any}`] / totalValue) * circleLength;
+      return output;
+    });
+
     return `
     <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
       <circle cx="${size / 2}" cy="${size / 2}" r="${
       size / 2 - 3
     }" fill="none" stroke="black" stroke-width="${line}"/>
+    ${circles}
     </svg>
   `;
   }
@@ -167,7 +191,7 @@ const MapComponent = ({}): JSX.Element => {
             <b>Locations outside Bologna</b>
           </InputGroup.Text>
           <InputGroup.Text className="boxShadow">
-            <small>{countValues()} people</small>
+            <small>{countPeople()} people</small>
           </InputGroup.Text>
         </InputGroup>
       </div>
