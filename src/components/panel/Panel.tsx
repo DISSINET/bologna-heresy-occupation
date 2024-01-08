@@ -345,7 +345,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                   <small>
                     people (
                     {selectedLocation["name"] &&
-                      selectedLocation["name"].split(",").length}
+                      selectedLocation["name"].split(",").length - 1}
                     )
                   </small>
                 </Card.Subtitle>

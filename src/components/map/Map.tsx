@@ -74,11 +74,12 @@ const MapComponent = ({}): JSX.Element => {
     if (sizeShows === "pos") {
       let dep = pos.dep ? parseInt(d.dep) : 0;
       let nondep = pos.nondep ? parseInt(d.non_dep) : 0;
-      return ((dep + nondep) * 10) + 5;
+      // logarithmic scale, +1 to show 
+      return Math.log10(dep + nondep + 1) * 40;
     } else {
       let male = sex.male ? parseInt(d.male) : 0;
       let female = sex.female ? parseInt(d.female) : 0;
-      return ((male + female) * 10) + 5;
+      return (male + female) * 10 + 5;
     }
   }
 
