@@ -14,8 +14,6 @@ import {
 } from "react-bootstrap";
 import { GoLocation } from "react-icons/go";
 import { BsGenderMale, BsGenderFemale } from "react-icons/bs";
-import { BsCheckLg, BsListUl } from "react-icons/bs";
-import { BiLinkExternal } from "react-icons/bi";
 import {
   selectLocation,
   setSizeShows,
@@ -108,10 +106,19 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
               <Col style={{ cursor: "default" }}>
                 {suspects[i].label}
                 <small title="occupation type">
-                  <i>
-                    {suspects[i].occupation_type &&
-                      `, • ${suspects[i].occupation_type}`}
-                  </i>
+                  {suspects[i].occupation_type && (
+                    <>
+                      <div style={{ float: "right" }}>
+                        <div
+                          style={{ background: Occupations.filter((e) => e.name == suspects[i].occupation_type)[0].color }}
+                          className={"circle"}
+                        ></div>
+                        <span>
+                          <i>&nbsp;{suspects[i].occupation_type}</i>
+                        </span>
+                      </div>
+                    </>
+                  )}
                 </small>{" "}
                 <br />
                 {suspects[i].cathar_milieu && suspects[i].cathar_milieu != 0 ? (

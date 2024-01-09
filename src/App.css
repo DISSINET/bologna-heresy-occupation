@@ -82,3 +82,12 @@
   background-color: #b15928 !important;
   border-color: #b15928 !important;
 }
+
+.circle {
+  background-color: #6a3d9a;
+  border-radius: 50%;
+  height: 0.6em;
+  margin-top: 0.5em;
+  width: 0.6em;
+  float: left;
+}
