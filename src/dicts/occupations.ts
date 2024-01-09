@@ -1,5 +1,5 @@
 export const Occupations = [
-  { id: "chruch", name: "churchperson", color: "#1f78b4" },
+  { id: "church", name: "churchperson", color: "#1f78b4" },
   { id: "craft", name: "craftsman", color: "#33a02c" },
   { id: "diss", name: "dissident minister", color: "#fb9a99" },
   { id: "free", name: "free profession", color: "#e31a1c" },

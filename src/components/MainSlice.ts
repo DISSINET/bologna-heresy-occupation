@@ -19,7 +19,7 @@ const initialState: MainSlice = {
   pos: { dep: true, nondep: true },
   rel: { cathar: true, apostolic: true, other: true, unknown: true },
   occ: {
-    chruch: true,
+    church: true,
     craft: true,
     diss: true,
     free: true,

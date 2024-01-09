@@ -15,11 +15,20 @@ import { Religions } from "../../dicts/religion";
 
 interface PieChartData {
   [index: string]: any;
-  man?: number;
+  cathar?: number;
+  apostolic?: number;
+  other?: number;
+  church?: number;
+  craft?: number;
+  diss?: number;
   free?: number;
-  unknown?: number;
+  man?: number;
   qual?: number;
+  merch?: number;
+  offi?: number;
+  serv?: number;
   sp?: number;
+  unknown?: number;
 }
 
 const MapComponent = ({}): JSX.Element => {
@@ -38,6 +47,9 @@ const MapComponent = ({}): JSX.Element => {
   const sizeShows = useAppSelector((state) => state.main.sizeShows);
   const sex = useAppSelector((state) => state.main.sex);
   const pos = useAppSelector((state) => state.main.pos);
+  const structureShows = useAppSelector((state) => state.main.structureShows);
+  const rel = useAppSelector((state) => state.main.rel);
+  const occ = useAppSelector((state) => state.main.occ);
 
   const cityLevel = new TileLayer({
     data: [
@@ -93,7 +105,27 @@ const MapComponent = ({}): JSX.Element => {
   }
 
   function buidPieChartData(d: any) {
-    let data: PieChartData = { free: 1, unknown: 5, qual: 8, sp: 3 };
+    /*
+    let data: PieChartData = {
+      cathar: d.cathar_milieu,
+      apostolic: d.apostolic_milieu,
+      other: d.other_heterodoxy,
+      unknown: d.undef_heresy,
+    };
+    */
+    let data: PieChartData = {
+      church: d.church,
+      craft: d.craft,
+      diss: d.diss,
+      free: d.free,
+      man: d.man,
+      qual: d.qual,
+      merch: d.merch,
+      offi: d.offi,
+      serv: d.serv,
+      sp: d.sp,
+      unknown: d.undef_occ,
+    };
     return data;
   }
 
@@ -106,11 +138,13 @@ const MapComponent = ({}): JSX.Element => {
     let spaceLeft = circleLength;
 
     let circles = Object.keys(data).map((key: any) => {
-      let color = Occupations.filter((e) => e.id == key);
+      let color = occ[key]
+        ? Occupations.filter((e) => e.id == key)[0].color
+        : "none";
 
       let output = `<circle cx="${size / 2}" cy="${size / 2}" r="${
         size / 4 - 3
-      }" fill="none" stroke="${color[0].color}" stroke-width="${
+      }" fill="none" stroke="${color}" stroke-width="${
         size / 2
       }" stroke-dasharray="${spaceLeft} ${circleLength}"/>`;
 
@@ -120,10 +154,10 @@ const MapComponent = ({}): JSX.Element => {
 
     return `
     <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+    ${circles}
       <circle cx="${size / 2}" cy="${size / 2}" r="${
       size / 2 - 3
     }" fill="none" stroke="black" stroke-width="${line}"/>
-    ${circles}
     </svg>
   `;
   }
@@ -142,7 +176,7 @@ const MapComponent = ({}): JSX.Element => {
       d.residence_x_coordinates,
       d.residence_y_coordinates,
     ],
-    opacity: 0.3,
+    opacity: 0.8,
     sizeScale: 1,
     getIcon: (d, { index }) => ({
       url: svgToDataURL(createSVGIcon(index, d)),
@@ -165,7 +199,7 @@ const MapComponent = ({}): JSX.Element => {
     // like useEffect <function>:<value change that triggers rerun>
     updateTriggers: {
       getSize: [pos, sex, sizeShows],
-      getIcon: [selectedLocation],
+      getIcon: [selectedLocation, occ, rel],
     },
   });
 
