@@ -13,6 +13,15 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { Occupations } from "../../dicts/occupations";
 import { Religions } from "../../dicts/religion";
 
+interface PieChartData {
+  [index: string]: any;
+  man?: number;
+  free?: number;
+  unknown?: number;
+  qual?: number;
+  sp?: number;
+}
+
 const MapComponent = ({}): JSX.Element => {
   const mapState = useAppSelector((state) => state.map);
   const dispatch = useAppDispatch();
@@ -74,17 +83,18 @@ const MapComponent = ({}): JSX.Element => {
     if (sizeShows === "pos") {
       let dep = pos.dep ? parseInt(d.dep) : 0;
       let nondep = pos.nondep ? parseInt(d.non_dep) : 0;
-      // logarithmic scale, +1 to show 
-      return Math.log10(dep + nondep + 1) * 40;
+      return (dep + nondep) * 10 + 5;
     } else {
       let male = sex.male ? parseInt(d.male) : 0;
       let female = sex.female ? parseInt(d.female) : 0;
-      return (male + female) * 10 + 5;
+      // logarithmic scale, +1 to show
+      return Math.log10(male + female + 1) * 40;
     }
   }
 
   function buidPieChartData(d: any) {
-    return { man: 12, free: 1, unknown: 5, qual: 8, sp: 3 };
+    let data: PieChartData = { free: 1, unknown: 5, qual: 8, sp: 3 };
+    return data;
   }
 
   function createSVGIcon(idx: any, d: any) {
@@ -104,7 +114,7 @@ const MapComponent = ({}): JSX.Element => {
         size / 2
       }" stroke-dasharray="${spaceLeft} ${circleLength}"/>`;
 
-      spaceLeft -= (data[`${key as any}`] / totalValue) * circleLength;
+      spaceLeft -= (data[key] / totalValue) * circleLength;
       return output;
     });
 
