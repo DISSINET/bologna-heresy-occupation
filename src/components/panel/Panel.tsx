@@ -110,7 +110,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 <small title="occupation type">
                   <i>
                     {suspects[i].occupation_type &&
-                      `, ${suspects[i].occupation_type}`}
+                      `, • ${suspects[i].occupation_type}`}
                   </i>
                 </small>{" "}
                 <br />

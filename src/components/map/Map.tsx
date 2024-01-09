@@ -105,27 +105,30 @@ const MapComponent = ({}): JSX.Element => {
   }
 
   function buidPieChartData(d: any) {
-    /*
-    let data: PieChartData = {
-      cathar: d.cathar_milieu,
-      apostolic: d.apostolic_milieu,
-      other: d.other_heterodoxy,
-      unknown: d.undef_heresy,
-    };
-    */
-    let data: PieChartData = {
-      church: d.church,
-      craft: d.craft,
-      diss: d.diss,
-      free: d.free,
-      man: d.man,
-      qual: d.qual,
-      merch: d.merch,
-      offi: d.offi,
-      serv: d.serv,
-      sp: d.sp,
-      unknown: d.undef_occ,
-    };
+    let data: PieChartData = {};
+    if (structureShows === "rel") {
+      data = {
+        cathar: d.cathar_milieu,
+        apostolic: d.apostolic_milieu,
+        other: d.other_heterodoxy,
+        unknown: d.undef_heresy,
+      };
+    }
+    if (structureShows === "occ") {
+      data = {
+        church: d.church,
+        craft: d.craft,
+        diss: d.diss,
+        free: d.free,
+        man: d.man,
+        qual: d.qual,
+        merch: d.merch,
+        offi: d.offi,
+        serv: d.serv,
+        sp: d.sp,
+        unknown: d.undef_occ,
+      };
+    }
     return data;
   }
 
@@ -138,10 +141,18 @@ const MapComponent = ({}): JSX.Element => {
     let spaceLeft = circleLength;
 
     let circles = Object.keys(data).map((key: any) => {
-      let color = occ[key]
-        ? Occupations.filter((e) => e.id == key)[0].color
-        : "none";
+      let color;
+      if (structureShows === "occ") {
+        color = occ[key]
+          ? Occupations.filter((e) => e.id == key)[0].color
+          : "none";
+      }
 
+      if (structureShows === "rel") {
+        color = rel[key]
+          ? Religions.filter((e) => e.id == key)[0].color
+          : "none";
+      }
       let output = `<circle cx="${size / 2}" cy="${size / 2}" r="${
         size / 4 - 3
       }" fill="none" stroke="${color}" stroke-width="${
@@ -199,7 +210,7 @@ const MapComponent = ({}): JSX.Element => {
     // like useEffect <function>:<value change that triggers rerun>
     updateTriggers: {
       getSize: [pos, sex, sizeShows],
-      getIcon: [selectedLocation, occ, rel],
+      getIcon: [selectedLocation, occ, rel, structureShows],
     },
   });
 
