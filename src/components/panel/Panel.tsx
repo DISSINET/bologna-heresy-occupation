@@ -172,6 +172,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
       data-testid="panel-wrapper"
       style={{
         maxHeight: "100%",
+        bottom: 0,
         display: "flex",
         flexFlow: "column nowrap",
       }}
@@ -180,7 +181,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
       <div
         style={{
           padding: "1em",
-          overflow: "scroll",
+          overflowY: "scroll",
           display: "flex",
           flexFlow: "column nowrap",
           gap: "20px",
