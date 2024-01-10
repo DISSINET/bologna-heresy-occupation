@@ -179,6 +179,9 @@ const MapComponent = ({}): JSX.Element => {
 <svg width="${size + 6}" height="${size + 6}" viewBox="0 0 ${size + 6} ${
       size + 6
     }" xmlns="http://www.w3.org/2000/svg">
+<circle cx="${(size + 6) / 2}" cy="${(size + 6) / 2}" r="${
+      size / 2
+    }" fill="white" stroke="none"/>
 ${circles}
   <circle cx="${(size + 6) / 2}" cy="${(size + 6) / 2}" r="${
       size / 2
