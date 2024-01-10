@@ -12,24 +12,7 @@ import getResidenceNames from "../../utils/getResidenceName";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Occupations } from "../../dicts/occupations";
 import { Religions } from "../../dicts/religion";
-
-interface PieChartData {
-  [index: string]: any;
-  cathar?: number;
-  apostolic?: number;
-  other?: number;
-  church?: number;
-  craft?: number;
-  diss?: number;
-  free?: number;
-  man?: number;
-  qual?: number;
-  merch?: number;
-  offi?: number;
-  serv?: number;
-  sp?: number;
-  unknown?: number;
-}
+import { PieChartData } from "../../types";
 
 const MapComponent = ({}): JSX.Element => {
   const mapState = useAppSelector((state) => state.map);
@@ -95,7 +78,7 @@ const MapComponent = ({}): JSX.Element => {
     if (sizeShows === "pos") {
       let dep = pos.dep ? parseInt(d.dep) : 0;
       let nondep = pos.nondep ? parseInt(d.non_dep) : 0;
-      return (dep + nondep) * 10 + 5;
+      return Math.log10(dep + nondep + 1) * 40;
     } else {
       let male = sex.male ? parseInt(d.male) : 0;
       let female = sex.female ? parseInt(d.female) : 0;
@@ -105,6 +88,10 @@ const MapComponent = ({}): JSX.Element => {
   }
 
   function buidPieChartData(d: any) {
+    // non zero object entries
+    const fn = (obj: any) =>
+      Object.fromEntries(Object.entries(obj).filter(([, v]) => v !== 0));
+
     let data: PieChartData = {};
     if (structureShows === "rel") {
       data = {
@@ -129,6 +116,7 @@ const MapComponent = ({}): JSX.Element => {
         unknown: d.undef_occ,
       };
     }
+    data = fn(data);
     return data;
   }
 
@@ -136,7 +124,7 @@ const MapComponent = ({}): JSX.Element => {
     let size = getRadius(d);
     let line = getHiglight(d);
     const data = buidPieChartData(d);
-    const circleLength = Math.PI * ((size / 4 - 3) * 2);
+    const circleLength = Math.PI * ((size / 4) * 2);
     const totalValue = Object.values(data).reduce((a: any, b: any) => a + b, 0);
     let spaceLeft = circleLength;
 
@@ -154,7 +142,7 @@ const MapComponent = ({}): JSX.Element => {
           : "none";
       }
       let output = `<circle cx="${size / 2}" cy="${size / 2}" r="${
-        size / 4 - 3
+        size / 4
       }" fill="none" stroke="${color}" stroke-width="${
         size / 2
       }" stroke-dasharray="${spaceLeft} ${circleLength}"/>`;
@@ -167,8 +155,8 @@ const MapComponent = ({}): JSX.Element => {
     <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
     ${circles}
       <circle cx="${size / 2}" cy="${size / 2}" r="${
-      size / 2 - 3
-    }" fill="none" stroke="black" stroke-width="${line}"/>
+      size / 2 - line
+    }" fill="none" stroke="darkgoldenrod" stroke-width="${line}"/>
     </svg>
   `;
   }
@@ -195,11 +183,6 @@ const MapComponent = ({}): JSX.Element => {
       height: getRadius(d),
     }),
     getSize: (d) => getRadius(d),
-    //getLineWidth: (d) => getHiglight(d),
-    //getFillColor: (d) => [200, 50, 200],
-    //getLineColor: (d) => [2, 20, 30],
-    // hover buffer around object
-    //onHover: TODO set shadow or something
 
     onClick: (object) => object && dispatchSelectedLocation(object.object),
 

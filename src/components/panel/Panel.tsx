@@ -110,7 +110,11 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                     <>
                       <div style={{ float: "right" }}>
                         <div
-                          style={{ background: Occupations.filter((e) => e.name == suspects[i].occupation_type)[0].color }}
+                          style={{
+                            background: Occupations.filter(
+                              (e) => e.name == suspects[i].occupation_type
+                            )[0].color,
+                          }}
                           className={"circle"}
                         ></div>
                         <span>

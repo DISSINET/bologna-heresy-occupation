@@ -31,3 +31,21 @@ export interface INestDictionary<T> {
 export interface IDictionary {
   [index: string]: string | number | boolean | null;
 }
+
+export interface PieChartData {
+  [index: string]: any;
+  cathar?: number;
+  apostolic?: number;
+  other?: number;
+  church?: number;
+  craft?: number;
+  diss?: number;
+  free?: number;
+  man?: number;
+  qual?: number;
+  merch?: number;
+  offi?: number;
+  serv?: number;
+  sp?: number;
+  unknown?: number;
+}
