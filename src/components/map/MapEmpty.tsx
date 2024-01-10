@@ -61,30 +61,32 @@ const MapComponentEmpty = ({}): JSX.Element => {
       Object.fromEntries(Object.entries(obj).filter(([, v]) => v !== 0));
 
     let data: PieChartData = {};
-    if (structureShows === "rel") {
+   if (structureShows === "rel") {
       data = {
-        cathar: d.cathar_milieu,
-        apostolic: d.apostolic_milieu,
-        other: d.other_heterodoxy,
-        unknown: d.undef_heresy,
+        cathar: parseInt(d.cathar_milieu),
+        apostolic: parseInt(d.apostolic_milieu),
+        other: parseInt(d.other_heterodoxy),
+        unknown: parseInt(d.undef_heresy),
       };
     }
     if (structureShows === "occ") {
       data = {
-        church: d.church,
-        craft: d.craft,
-        diss: d.diss,
-        free: d.free,
-        man: d.man,
-        qual: d.qual,
-        merch: d.merch,
-        offi: d.offi,
-        serv: d.serv,
-        sp: d.sp,
-        unknown: d.undef_occ,
+        church: parseInt(d.church),
+        craft: parseInt(d.craft),
+        diss: parseInt(d.diss),
+        free: parseInt(d.free),
+        man: parseInt(d.man),
+        qual: parseInt(d.qual),
+        merch: parseInt(d.merch),
+        offi: parseInt(d.offi),
+        serv: parseInt(d.serv),
+        sp: parseInt(d.sp),
+        unknown: parseInt(d.undef_occ),
       };
     }
+   
     data = fn(data);
+
     return data;
   }
 
@@ -92,32 +94,50 @@ const MapComponentEmpty = ({}): JSX.Element => {
     let size = getRadius(d);
     let line = getHiglight(d);
     const data = buidPieChartData(d);
-    const circleLength = Math.PI * ((size / 4) * 2);
+
     const totalValue = Object.values(data).reduce((a: any, b: any) => a + b, 0);
-    let spaceLeft = circleLength;
+    let center = (size + 6) / 2;
+    let radius = size / 2;
+    let startAngle = 0;
+    let endAngle = 0;
 
-    let circles = Object.keys(data).map((key: any) => {
-      let color;
-      if (structureShows === "occ") {
-        color = occ[key]
-          ? Occupations.filter((e) => e.id == key)[0].color
-          : "none";
+    let circles = Object.keys(data).map(
+      (key: any, index: number, elements: string[]) => {
+        let color;
+        if (structureShows === "occ") {
+          color = occ[key]
+            ? Occupations.filter((e) => e.id == key)[0].color
+            : "none";
+        }
+
+        if (structureShows === "rel") {
+          color = rel[key]
+            ? Religions.filter((e) => e.id == key)[0].color
+            : "none";
+        }
+
+        const sliceAngle = (data[key] / totalValue) * 360;
+        const largeArcFlag = sliceAngle > 180 ? 1 : 0;
+
+        startAngle = endAngle;
+        endAngle = startAngle + sliceAngle;
+
+        const startX = center + radius * Math.cos((startAngle * Math.PI) / 180);
+        const startY = center + radius * Math.sin((startAngle * Math.PI) / 180);
+        const endX = center + radius * Math.cos((endAngle * Math.PI) / 180);
+        const endY = center + radius * Math.sin((endAngle * Math.PI) / 180);
+
+        const pathData = [
+          `M ${center},${center}`,
+          `L ${startX},${startY}`,
+          `A ${radius},${radius} 0 ${largeArcFlag},1 ${endX},${endY}`,
+          "Z",
+        ].join(" ");
+        const out = `<path key="${index}" d="${pathData}" fill="${color} " />`;
+
+        return out;
       }
-
-      if (structureShows === "rel") {
-        color = rel[key]
-          ? Religions.filter((e) => e.id == key)[0].color
-          : "none";
-      }
-      let output = `<circle cx="${(size+6) / 2}" cy="${(size+6) / 2}" r="${
-        size / 4
-      }" fill="none" stroke="${color}" stroke-width="${
-        size / 2
-      }" stroke-dasharray="${spaceLeft} ${circleLength}"/>`;
-
-      spaceLeft -= (data[key] / totalValue) * circleLength;
-      return output;
-    });
+    );
 
     return `
   <svg width="${size + 6}" height="${size + 6}" viewBox="0 0 ${size + 6} ${
