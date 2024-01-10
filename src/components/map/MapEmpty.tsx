@@ -61,7 +61,7 @@ const MapComponentEmpty = ({}): JSX.Element => {
       Object.fromEntries(Object.entries(obj).filter(([, v]) => v !== 0));
 
     let data: PieChartData = {};
-   if (structureShows === "rel") {
+    if (structureShows === "rel") {
       data = {
         cathar: parseInt(d.cathar_milieu),
         apostolic: parseInt(d.apostolic_milieu),
@@ -84,7 +84,7 @@ const MapComponentEmpty = ({}): JSX.Element => {
         unknown: parseInt(d.undef_occ),
       };
     }
-   
+
     data = fn(data);
 
     return data;

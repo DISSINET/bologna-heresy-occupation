@@ -146,6 +146,12 @@ const MapComponent = ({}): JSX.Element => {
             : "none";
         }
 
+        if (totalValue === 1) {
+          return `<circle cx="${(size + 6) / 2}" cy="${(size + 6) / 2}" r="${
+            size / 2
+          }" fill="${color}" stroke-width="${size / 2}"/>`;
+        }
+
         const sliceAngle = (data[key] / totalValue) * 360;
         const largeArcFlag = sliceAngle > 180 ? 1 : 0;
 
