@@ -141,7 +141,7 @@ const MapComponent = ({}): JSX.Element => {
           ? Religions.filter((e) => e.id == key)[0].color
           : "none";
       }
-      let output = `<circle cx="${size / 2}" cy="${size / 2}" r="${
+      let output = `<circle cx="${(size + 6) / 2}" cy="${(size + 6) / 2}" r="${
         size / 4
       }" fill="none" stroke="${color}" stroke-width="${
         size / 2
@@ -152,10 +152,12 @@ const MapComponent = ({}): JSX.Element => {
     });
 
     return `
-    <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+    <svg width="${size + 6}" height="${size + 6}" viewBox="0 0 ${size + 6} ${
+      size + 6
+    }" xmlns="http://www.w3.org/2000/svg">
     ${circles}
-      <circle cx="${size / 2}" cy="${size / 2}" r="${
-      size / 2 - line
+      <circle cx="${(size + 6) / 2}" cy="${(size + 6) / 2}" r="${
+      size / 2 
     }" fill="none" stroke="darkgoldenrod" stroke-width="${line}"/>
     </svg>
   `;

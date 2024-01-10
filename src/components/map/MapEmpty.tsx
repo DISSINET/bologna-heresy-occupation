@@ -47,11 +47,11 @@ const MapComponentEmpty = ({}): JSX.Element => {
     if (sizeShows === "pos") {
       let dep = pos.dep ? parseInt(d.dep) : 0;
       let nondep = pos.nondep ? parseInt(d.non_dep) : 0;
-      return dep + nondep;
+      return (dep + nondep) * 0.8;
     } else {
       let male = sex.male ? parseInt(d.male) : 0;
       let female = sex.female ? parseInt(d.female) : 0;
-      return male + female;
+      return (male + female) * 0.8;
     }
   }
 
@@ -109,7 +109,7 @@ const MapComponentEmpty = ({}): JSX.Element => {
           ? Religions.filter((e) => e.id == key)[0].color
           : "none";
       }
-      let output = `<circle cx="${size / 2}" cy="${size / 2}" r="${
+      let output = `<circle cx="${(size+6) / 2}" cy="${(size+6) / 2}" r="${
         size / 4
       }" fill="none" stroke="${color}" stroke-width="${
         size / 2
@@ -120,10 +120,12 @@ const MapComponentEmpty = ({}): JSX.Element => {
     });
 
     return `
-  <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+  <svg width="${size + 6}" height="${size + 6}" viewBox="0 0 ${size + 6} ${
+      size + 6
+    }" xmlns="http://www.w3.org/2000/svg">
   ${circles}
-    <circle cx="${size / 2}" cy="${size / 2}" r="${
-      size / 2 - line
+    <circle cx="${(size + 6) / 2}" cy="${(size + 6) / 2}" r="${
+      size / 2
     }" fill="none" stroke="darkgoldenrod" stroke-width="${line}"/>
   </svg>
 `;
