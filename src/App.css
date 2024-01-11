@@ -13,11 +13,15 @@
 }
 
 .bg-cathar {
-  background-color: #4098d7 !important;
+  background-color: #8719e0 !important;
 }
 
 .bg-apostolic {
   background-color: #3ebd93 !important;
+}
+
+.bg-other {
+  background-color: #f0b429 !important;
 }
 
 .check-secondary:checked {
@@ -26,8 +30,8 @@
 }
 
 .check-cathar:checked {
-  background-color: #4098d7 !important;
-  border-color: #4098d7 !important;
+  background-color: #8719e0 !important;
+  border-color: #8719e0 !important;
 }
 
 .check-apostolic:checked {
@@ -36,8 +40,8 @@
 }
 
 .check-other:checked {
-  background-color: gray !important;
-  border-color: gray !important;
+  background-color: #f0b429 !important;
+  border-color: #f0b429 gray !important;
 }
 
 .check-unknown:checked {
@@ -45,12 +49,12 @@
   border-color: #d3cec4 !important;
 }
 .check-church:checked {
-  background-color: #1f78b4 !important;
-  border-color: #1f78b4 !important;
+  background-color: #463ee2 !important;
+  border-color: #463ee2 #1f78b4 !important;
 }
 .check-craft:checked {
-  background-color: #33a02c !important;
-  border-color: #33a02c !important;
+  background-color: #38bec9 !important;
+  border-color: #38bec9 !important;
 }
 .check-diss:checked {
   background-color: #fb9a99 !important;
@@ -69,8 +73,8 @@
   border-color: #ff7f00 !important;
 }
 .check-merch:checked {
-  background-color: #cab2d6 !important;
-  border-color: #cab2d6 !important;
+  background-color: #33a02c !important;
+  border-color: #33a02c !important;
 }
 .check-offi:checked {
   background-color: #6a3d9a !important;

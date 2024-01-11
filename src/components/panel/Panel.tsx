@@ -164,7 +164,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 {suspects[i].other_heterodoxy &&
                 suspects[i].other_heterodoxy != 0 ? (
                   <small title="religious affiliation">
-                    <Badge bg="secondary">{"other heterodoxy"}</Badge>
+                    <Badge bg="other">{"other heterodoxy"}</Badge>
                   </small>
                 ) : (
                   ""
