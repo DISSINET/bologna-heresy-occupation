@@ -215,7 +215,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
           <br />
           <InputGroup className="mb-2 mt-1" size="sm">
             <InputGroup.Text id="symbol-size">
-              Symbol size shows
+              Filter symbol size by
             </InputGroup.Text>
             <Form.Select
               title="select symbol size value"
@@ -275,6 +275,58 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
             ""
           )}
 
+          <div id="legend" className="mb-3 mt-1">
+            <svg height={82}>
+              <text x={10} y={15} className="legend">
+                number of people
+              </text>
+              <circle
+                cx={45}
+                cy={60}
+                r={4}
+                fill={"white"}
+                stroke={"sienna"}
+                stroke-width={1.2}
+              />
+              <text fill={"sienna"} x={40} y={79} className="legend">
+                1
+              </text>
+              <circle
+                cx={80}
+                cy={52}
+                r={12}
+                fill={"white"}
+                stroke={"sienna"}
+                stroke-width={1.2}
+              />
+              <text fill={"sienna"} x={77} y={78} className="legend">
+                5
+              </text>
+              <circle
+                cx={130}
+                cy={42}
+                r={22}
+                stroke={"sienna"}
+                fill={"white"}
+                stroke-width={1.2}
+              />
+              <text fill={"sienna"} x={123} y={78} className="legend">
+                20
+              </text>
+              <circle
+                cx={200}
+                cy={33}
+                r={32}
+                stroke={"sienna"}
+                fill={"white"}
+                stroke-width={1.2}
+              />
+
+              <text fill={"sienna"} x={192} y={78} className="legend">
+                60
+              </text>
+            </svg>
+          </div>
           <InputGroup className="mb-2 mt-1" size="sm">
             <InputGroup.Text id="symbol-structure">
               Symbol structure shows

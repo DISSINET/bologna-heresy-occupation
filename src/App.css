@@ -1,6 +1,9 @@
 .hero {
   font-family: Muni;
 }
+.legend {
+  font: italic 12px sans-serif;
+}
 
 .boxShadow {
   box-shadow: 0 10px 20px hsla(0, 0%, 0%, 0.15), 0 3px 6px hsla(0, 0%, 0%, 0.1);

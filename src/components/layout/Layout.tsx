@@ -27,6 +27,7 @@ const Layout = ({}): JSX.Element => {
         <Col
           md="3"
           sm="12"
+          className="boxShadowThin"
           style={{
             background: "#fff",
             padding: 0,
