@@ -53,7 +53,7 @@ const MapComponent = ({}): JSX.Element => {
           data: null as any,
           image: props.data,
           bounds: [west, south, east, north],
-          desaturate: 0.4,
+          desaturate: 0.3,
         }),
       ];
     },

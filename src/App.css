@@ -38,10 +38,9 @@
 }
 
 .check-unknown:checked {
-  background-color: lightgray !important;
-  border-color: lightgray !important;
+  background-color: #d3cec4 !important;
+  border-color: #d3cec4 !important;
 }
-
 .check-church:checked {
   background-color: #1f78b4 !important;
   border-color: #1f78b4 !important;

@@ -9,5 +9,5 @@ export const Occupations = [
   { id: "offi", name: "official", color: "#6a3d9aa" },
   { id: "serv", name: "servant", color: "#bc80bd" },
   { id: "sp", name: "service provider", color: "#b15928" },
-  { id: "unknown", name: "unknown", color: "lightgray" },
+  { id: "unknown", name: "unknown", color: "#E8E6E1" },
 ];
