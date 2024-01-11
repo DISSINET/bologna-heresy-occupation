@@ -12,7 +12,7 @@ import getResidenceNames from "../../utils/getResidenceName";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Occupations } from "../../dicts/occupations";
 import { Religions } from "../../dicts/religion";
-import { PieChartData } from "../../types";
+import { PieChartData, Location } from "../../types";
 
 const MapComponent = ({}): JSX.Element => {
   const mapState = useAppSelector((state) => state.map);
@@ -54,6 +54,7 @@ const MapComponent = ({}): JSX.Element => {
           data: null as any,
           image: props.data,
           bounds: [west, south, east, north],
+          desaturate: 0.4,
         }),
       ];
     },
@@ -67,10 +68,27 @@ const MapComponent = ({}): JSX.Element => {
   }
 
   function countPeople() {
+    //TODO not working
     let sum = 0;
-    locations.forEach((l) => {
-      sum = sum + l.male + l.female;
-    });
+    if (structureShows === "rel") {
+      locations.forEach((l: Location) => {
+        Object.keys(rel).forEach((key) => {
+          if (rel[key]) {
+            sum = sum + parseInt(l[key]);
+          }
+        });
+      });
+    }
+    if (structureShows === "occ") {
+      locations.forEach((l: Location) => {
+        Object.keys(occ).forEach((key) => {
+          if (rel[key]) {
+            sum = sum + parseInt(l[key]);
+          }
+        });
+      });
+    }
+    console.log(sum);
     return sum;
   }
 
@@ -120,7 +138,7 @@ const MapComponent = ({}): JSX.Element => {
     return data;
   }
 
-  function createSVGIcon(idx: any, d: any) {
+  function createSVGIcon(d: any) {
     let size = getRadius(d);
     let line = getHiglight(d);
     const data = buidPieChartData(d);
@@ -207,7 +225,7 @@ ${circles}
     opacity: 0.8,
     sizeScale: 1,
     getIcon: (d, { index }) => ({
-      url: svgToDataURL(createSVGIcon(index, d)),
+      url: svgToDataURL(createSVGIcon(d)),
       width: getRadius(d),
       height: getRadius(d),
     }),
