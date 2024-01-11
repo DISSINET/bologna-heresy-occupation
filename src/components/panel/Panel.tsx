@@ -43,6 +43,10 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
   const handleInfoModalClose = () => toggleInfoModal(false);
   const handleInfoModalShow = () => toggleInfoModal(true);
 
+  const [allOccChecked, toggleAllOccChecked] = useState(true);
+  //const handleInfoModalClose = () => toggleInfoModal(false);
+  //const handleInfoModalShow = () => toggleInfoModal(true);
+
   const selectedLocation = useAppSelector(
     (state) => state.main.selectedLocation
   );
@@ -56,6 +60,8 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
 
   const now = new Date();
   const suspects: INestDictionary<IDictionary> = peopleData;
+
+  function setAllOccChecked() {}
 
   function deselectLocation() {
     dispatch(selectLocation({}));
@@ -284,6 +290,22 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 );
               })
             : ""}
+          <Form.Check
+            inline
+            type={"checkbox"}
+            id={"all-occ"}
+            style={{ float: "right" }}
+          >
+            <Form.Check.Input
+              checked={allOccChecked}
+              type={"checkbox"}
+              className={"check-secondary"}
+              onChange={() => setAllOccChecked()}
+            />
+            <Form.Check.Label>
+              <i>{"select all"}</i>
+            </Form.Check.Label>
+          </Form.Check>
           {structureShows == "rel"
             ? Religions.map((r: any, i: number) => {
                 return (
@@ -474,7 +496,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
               </ul>
               <p>
                 Recommended citation: Riccardo, Katia; Ondrejka, Peter; Zbíral,
-                David (2023). Heresy and occupation in Bologna around 1300 ( v.{" "}
+                David (2024). Heresy and occupation in Bologna around 1300 ( v.{" "}
                 {packageJson.version}){" "}
                 <i>Dissident Networks Project (DISSINET)</i>. Retrieved{" "}
                 {now.toLocaleDateString("en-US", {
