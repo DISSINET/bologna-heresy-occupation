@@ -73,6 +73,22 @@ export const mainSlice = createSlice({
     resetRelDict: (state) => {
       state.rel = initialState.rel;
     },
+    clearOccDict: (state) => {
+      let newOcc = {
+        church: false,
+        craft: false,
+        diss: false,
+        free: false,
+        man: false,
+        qual: false,
+        merch: false,
+        offi: false,
+        serv: false,
+        sp: false,
+        unknown: false,
+      };
+      state.occ = newOcc;
+    },
     changeOccDict: (state, action: PayloadAction<Array<any>>) => {
       let newOcc = state.occ;
       newOcc[action.payload[0]] = action.payload[1];
@@ -96,6 +112,7 @@ export const {
   resetRelDict,
   changeOccDict,
   resetOccDict,
+  clearOccDict,
 } = mainSlice.actions;
 
 export default mainSlice.reducer;

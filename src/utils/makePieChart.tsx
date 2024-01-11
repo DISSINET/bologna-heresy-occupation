@@ -18,7 +18,7 @@ function buidPieChartData(d: any, structureShows: any) {
   }
   if (structureShows === "occ") {
     data = {
-    unknown: parseInt(d.undef_occ),
+      unknown: parseInt(d.undef_occ),
       church: parseInt(d.church),
       craft: parseInt(d.craft),
       diss: parseInt(d.diss),

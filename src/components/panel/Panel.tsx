@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Hero from "./Hero";
 import { useAppSelector, useAppDispatch } from "./../../app/hooks";
 import {
@@ -26,6 +26,7 @@ import {
   resetRelDict,
   changeOccDict,
   resetOccDict,
+  clearOccDict,
 } from "../MainSlice";
 import packageJson from "../../../package.json";
 import { Card } from "react-bootstrap";
@@ -44,8 +45,8 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
   const handleInfoModalShow = () => toggleInfoModal(true);
 
   const [allOccChecked, toggleAllOccChecked] = useState(true);
-  //const handleInfoModalClose = () => toggleInfoModal(false);
-  //const handleInfoModalShow = () => toggleInfoModal(true);
+  const handleOccNotAll = () => toggleAllOccChecked(false);
+  const handleOccAll = () => toggleAllOccChecked(true);
 
   const selectedLocation = useAppSelector(
     (state) => state.main.selectedLocation
@@ -61,7 +62,21 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
   const now = new Date();
   const suspects: INestDictionary<IDictionary> = peopleData;
 
-  function setAllOccChecked() {}
+  useEffect(() => {
+    if (Object.values(occ).every(Boolean)) {
+      handleOccAll();
+    } else {
+      handleOccNotAll();
+    }
+  }, [occ]);
+
+  function setAllOccChecked() {
+    if (allOccChecked) {
+      dispatch(clearOccDict());
+    } else {
+      dispatch(resetOccDict());
+    }
+  }
 
   function deselectLocation() {
     dispatch(selectLocation({}));
@@ -290,22 +305,27 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 );
               })
             : ""}
-          <Form.Check
-            inline
-            type={"checkbox"}
-            id={"all-occ"}
-            style={{ float: "right" }}
-          >
-            <Form.Check.Input
-              checked={allOccChecked}
+          {structureShows == "occ" ? (
+            <Form.Check
+              inline
               type={"checkbox"}
-              className={"check-secondary"}
-              onChange={() => setAllOccChecked()}
-            />
-            <Form.Check.Label>
-              <i>{"select all"}</i>
-            </Form.Check.Label>
-          </Form.Check>
+              id={"all-occ"}
+              style={{ float: "right" }}
+            >
+              <Form.Check.Input
+                checked={allOccChecked}
+                type={"checkbox"}
+                className={"check-secondary"}
+                onChange={() => setAllOccChecked()}
+              />
+              <Form.Check.Label>
+                <i>{allOccChecked ? "deselect all" : "select all"}</i>
+              </Form.Check.Label>
+            </Form.Check>
+          ) : (
+            ""
+          )}
+
           {structureShows == "rel"
             ? Religions.map((r: any, i: number) => {
                 return (
