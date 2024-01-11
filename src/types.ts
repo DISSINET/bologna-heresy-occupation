@@ -1,4 +1,5 @@
 export class Location {
+  [index: string]: any;
   residence_x_coordinates?: number = 0;
   residence_y_coordinates?: number = 0;
   name?: string = "";
