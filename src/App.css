@@ -12,15 +12,15 @@
   box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.2);
 }
 
-.bg-cathar {
+.bg-cathar_milieu {
   background-color: #8719e0 !important;
 }
 
-.bg-apostolic {
+.bg-apostolic_milieu {
   background-color: #3ebd93 !important;
 }
 
-.bg-other {
+.bg-other_heterodoxy {
   background-color: #f0b429 !important;
 }
 
@@ -29,22 +29,30 @@
   border-color: #9fb3c8 !important;
 }
 
-.check-cathar:checked {
+.check-cathar_milieu:checked {
   background-color: #8719e0 !important;
   border-color: #8719e0 !important;
 }
 
-.check-apostolic:checked {
+.check-apostolic_milieu:checked {
   background-color: #3ebd93 !important;
   border-color: #3ebd93 !important;
 }
 
-.check-other:checked {
+.check-other_heterodoxy:checked {
   background-color: #f0b429 !important;
   border-color: #f0b429 gray !important;
 }
 
 .check-unknown:checked {
+  background-color: #d3cec4 !important;
+  border-color: #d3cec4 !important;
+}
+.check-undef_occ:checked {
+  background-color: #d3cec4 !important;
+  border-color: #d3cec4 !important;
+}
+.check-undef_heresy:checked {
   background-color: #d3cec4 !important;
   border-color: #d3cec4 !important;
 }

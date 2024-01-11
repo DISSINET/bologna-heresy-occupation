@@ -10,6 +10,7 @@ import locations from "../../data/locations.json";
 import getResidenceNames from "../../utils/getResidenceName";
 import { InputGroup } from "react-bootstrap";
 import createSVGIcon from "../../utils/makePieChart";
+import countPeople from "../../utils/countPeople";
 
 const MapComponentBologna = ({}): JSX.Element => {
   const mapState = useAppSelector((state) => state.bologna);
@@ -138,7 +139,9 @@ const MapComponentBologna = ({}): JSX.Element => {
             <b>Bologna</b>
           </InputGroup.Text>
           <InputGroup.Text className="boxShadow">
-            <small>238 people</small>
+            <small>
+              {countPeople(structureShows, locations, rel, occ)} people
+            </small>
           </InputGroup.Text>
         </InputGroup>
       </div>

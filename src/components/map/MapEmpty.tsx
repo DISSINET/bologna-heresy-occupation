@@ -6,6 +6,7 @@ import locations from "../../data/locations-none.json";
 import getResidenceNames from "../../utils/getResidenceName";
 import InputGroup from "react-bootstrap/InputGroup";
 import createSVGIcon from "../../utils/makePieChart";
+import countPeople from "../../utils/countPeople";
 
 const MapComponentEmpty = ({}): JSX.Element => {
   const mapState = {
@@ -111,7 +112,9 @@ const MapComponentEmpty = ({}): JSX.Element => {
             <b>Unspecified location</b>
           </InputGroup.Text>
           <InputGroup.Text className="boxShadowThin">
-            <small>238 people</small>
+            <small>
+              {countPeople(structureShows, locations, rel, occ)} people
+            </small>
           </InputGroup.Text>
         </InputGroup>
       </div>

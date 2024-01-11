@@ -17,7 +17,12 @@ const initialState: MainSlice = {
   structureShows: "occ",
   sex: { male: true, female: true },
   pos: { dep: true, nondep: true },
-  rel: { cathar: true, apostolic: true, other: true, unknown: true },
+  rel: {
+    cathar_milieu: true,
+    apostolic_milieu: true,
+    other_heterodoxy: true,
+    undef_heresy: true,
+  },
   occ: {
     church: true,
     craft: true,
@@ -29,7 +34,7 @@ const initialState: MainSlice = {
     offi: true,
     serv: true,
     sp: true,
-    unknown: true,
+    undef_occ: true,
   },
 };
 
@@ -85,7 +90,7 @@ export const mainSlice = createSlice({
         offi: false,
         serv: false,
         sp: false,
-        unknown: false,
+        undef_occ: false,
       };
       state.occ = newOcc;
     },

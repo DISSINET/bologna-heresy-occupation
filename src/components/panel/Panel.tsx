@@ -148,7 +148,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 <br />
                 {suspects[i].cathar_milieu && suspects[i].cathar_milieu != 0 ? (
                   <small title="religious affiliation">
-                    <Badge bg="cathar">{"Cathar milieu"}</Badge>
+                    <Badge bg="cathar_milieu">{"Cathar milieu"}</Badge>
                   </small>
                 ) : (
                   ""
@@ -156,7 +156,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 {suspects[i].apostolic_milieu &&
                 suspects[i].apostolic_milieu != 0 ? (
                   <small title="religious affiliation">
-                    <Badge bg="apostolic">{"Apostolic milieu"}</Badge>
+                    <Badge bg="apostolic_milieu">{"Apostolic milieu"}</Badge>
                   </small>
                 ) : (
                   ""
@@ -164,7 +164,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 {suspects[i].other_heterodoxy &&
                 suspects[i].other_heterodoxy != 0 ? (
                   <small title="religious affiliation">
-                    <Badge bg="other">{"other heterodoxy"}</Badge>
+                    <Badge bg="other_heterodoxy">{"other heterodoxy"}</Badge>
                   </small>
                 ) : (
                   ""

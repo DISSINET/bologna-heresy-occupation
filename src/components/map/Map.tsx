@@ -10,8 +10,8 @@ import locations from "../../data/locations-out.json";
 import bolbox from "../../data/bologna.json";
 import getResidenceNames from "../../utils/getResidenceName";
 import InputGroup from "react-bootstrap/InputGroup";
-import { Location } from "../../types";
 import createSVGIcon from "../../utils/makePieChart";
+import countPeople from "../../utils/countPeople";
 
 const MapComponent = ({}): JSX.Element => {
   const mapState = useAppSelector((state) => state.map);
@@ -66,31 +66,6 @@ const MapComponent = ({}): JSX.Element => {
     return 1;
   }
 
-  function countPeople() {
-    //TODO not working
-    let sum = 0;
-    if (structureShows === "rel") {
-      locations.forEach((l: Location) => {
-        Object.keys(rel).forEach((key) => {
-          if (rel[key]) {
-            sum = sum + parseInt(l[key]);
-          }
-        });
-      });
-    }
-    if (structureShows === "occ") {
-      locations.forEach((l: Location) => {
-        Object.keys(occ).forEach((key) => {
-          if (rel[key]) {
-            sum = sum + parseInt(l[key]);
-          }
-        });
-      });
-    }
-    console.log(sum);
-    return sum;
-  }
-
   function getRadius(d: any): number {
     if (sizeShows === "pos") {
       let dep = pos.dep ? parseInt(d.dep) : 0;
@@ -99,7 +74,6 @@ const MapComponent = ({}): JSX.Element => {
     } else {
       let male = sex.male ? parseInt(d.male) : 0;
       let female = sex.female ? parseInt(d.female) : 0;
-      // logarithmic scale, +1 to show
       return Math.log10(male + female + 1) * 40;
     }
   }
@@ -175,7 +149,9 @@ const MapComponent = ({}): JSX.Element => {
             <b>Locations outside Bologna</b>
           </InputGroup.Text>
           <InputGroup.Text className="boxShadow">
-            <small>{countPeople()} people</small>
+            <small>
+              {countPeople(structureShows, locations, rel, occ)} people
+            </small>
           </InputGroup.Text>
         </InputGroup>
       </div>

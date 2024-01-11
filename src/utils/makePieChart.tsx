@@ -10,15 +10,15 @@ function buidPieChartData(d: any, structureShows: any) {
   let data: PieChartData = {};
   if (structureShows === "rel") {
     data = {
-      unknown: parseInt(d.undef_heresy),
-      cathar: parseInt(d.cathar_milieu),
-      apostolic: parseInt(d.apostolic_milieu),
-      other: parseInt(d.other_heterodoxy),
+      undef_heresy: parseInt(d.undef_heresy),
+      cathar_milieu: parseInt(d.cathar_milieu),
+      apostolic_milieu: parseInt(d.apostolic_milieu),
+      other_heterodoxy: parseInt(d.other_heterodoxy),
     };
   }
   if (structureShows === "occ") {
     data = {
-      unknown: parseInt(d.undef_occ),
+      undef_occ: parseInt(d.undef_occ),
       church: parseInt(d.church),
       craft: parseInt(d.craft),
       diss: parseInt(d.diss),
