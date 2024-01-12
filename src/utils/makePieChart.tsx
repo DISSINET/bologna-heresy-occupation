@@ -48,13 +48,17 @@ export default function createSVGIcon(
   const data = buidPieChartData(d, structureShows);
 
   const totalValue = Object.values(data).reduce((a: any, b: any) => a + b, 0);
+  const nonEmptyCount = Object.values(data).reduce(
+    (a: any, item: any) => a + (item > 0 ? 1 : 0),
+    0
+  );
   let center = (size + 6) / 2;
   let radius = size / 2;
   let startAngle = 0;
   let endAngle = 0;
 
   let circles = Object.keys(data).map(
-    (key: any, index: number, elements: string[]) => {
+    (key: any, index: number) => {
       let color;
       if (structureShows === "occ") {
         color = occ[key]
@@ -68,7 +72,8 @@ export default function createSVGIcon(
           : "none";
       }
 
-      if (totalValue === 1) {
+      if (nonEmptyCount === 1) {
+        console.log("bla");
         return `<circle cx="${(size + 6) / 2}" cy="${(size + 6) / 2}" r="${
           size / 2
         }" fill="${color}" stroke-width="${size / 2}"/>`;

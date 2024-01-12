@@ -286,7 +286,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 r={4}
                 fill={"white"}
                 stroke={"sienna"}
-                stroke-width={1.2}
+                strokeWidth={1.2}
               />
               <text fill={"sienna"} x={40} y={79} className="legend">
                 1
@@ -297,7 +297,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 r={12}
                 fill={"white"}
                 stroke={"sienna"}
-                stroke-width={1.2}
+                strokeWidth={1.2}
               />
               <text fill={"sienna"} x={77} y={78} className="legend">
                 5
@@ -307,8 +307,8 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 cy={42}
                 r={22}
                 stroke={"sienna"}
+                strokeWidth={1.2}
                 fill={"white"}
-                stroke-width={1.2}
               />
               <text fill={"sienna"} x={123} y={78} className="legend">
                 20
@@ -318,8 +318,8 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                 cy={33}
                 r={32}
                 stroke={"sienna"}
+                strokeWidth={1.2}
                 fill={"white"}
-                stroke-width={1.2}
               />
 
               <text fill={"sienna"} x={192} y={78} className="legend">
