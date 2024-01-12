@@ -29,6 +29,7 @@ for col in colnames:
 df['ones'] = 1
 df['male'] = df['ones'].where(df['sex']=='m', 0)
 df['female'] = df['ones'].where(df['sex']=='f', 0)
+df['all'] = df['male'] + df['female']
 df['dep'] = df['ones'].where(df['deponent']=='deponent', 0)
 df['non_dep'] = df['ones'].where(df['deponent']=='non-deponent', 0)
 
@@ -42,7 +43,9 @@ df['merch'] = df['ones'].where(df['occupation_type']=='merchant', 0)
 df['offi'] = df['ones'].where(df['occupation_type']=='official', 0)
 df['serv'] = df['ones'].where(df['occupation_type']=='servant', 0)
 df['sp'] = df['ones'].where(df['occupation_type']=='service provider', 0)
-df['undef_heresy'] = df['ones'].where(pd.isnull(df['cathar_milieu']), 0)
+#df['undef_heresy'] = df['ones'].where(~pd.isnull(df[['cathar_milieu','apostolic_milieu', 'other_heterodoxy']]).all(1), 0)
+
+df['undef_heresy'] = df['ones'].where(((df['cathar_milieu']==0) & (df['apostolic_milieu']==0) & (df['other_heterodoxy']==0)), 0)
 df['undef_occ'] = df['ones'].where(pd.isnull(df['occupation_type']), 0)
 
 del df['ones']
@@ -53,8 +56,16 @@ del df['deponent']
 df['residence_id'] = df['residence_id'].astype(str) +","
 df['name'] = df['name'].astype(str) +","
 
+
 # group by coords
 grp_df = df.groupby(['residence_x_coordinates', 'residence_y_coordinates'], as_index=False).sum()
+
+# sort desc
+grp_df.sort_values(by=['all'], inplace=True, ascending=False)
+del grp_df['all']
+
+# split by location
+
 
 # save output 
 # grp_df.to_csv( f"{args.outfile}", encoding='utf-8-sig')
