@@ -12,6 +12,7 @@ import getResidenceNames from "../../utils/getResidenceName";
 import InputGroup from "react-bootstrap/InputGroup";
 import createSVGIcon from "../../utils/makePieChart";
 import countPeople from "../../utils/countPeople";
+import splitByLocation from "../../utils/splitByLocation";
 
 const MapComponent = ({}): JSX.Element => {
   const mapState = useAppSelector((state) => state.map);

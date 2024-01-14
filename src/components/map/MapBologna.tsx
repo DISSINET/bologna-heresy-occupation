@@ -6,7 +6,7 @@ import { updateMapState } from "./MapSliceBologna";
 import { selectLocation } from "./../MainSlice";
 import MapControlsBologna from "./MapControlsBologna";
 import MapScaleBologna from "./MapScaleBologna";
-import locations from "../../data/locations.json";
+import locations from "../../data/locations-bologna.json";
 import getResidenceNames from "../../utils/getResidenceName";
 import { InputGroup } from "react-bootstrap";
 import createSVGIcon from "../../utils/makePieChart";
