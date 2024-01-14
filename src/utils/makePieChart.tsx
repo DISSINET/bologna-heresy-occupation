@@ -218,7 +218,6 @@ export default function createSVGIcon(
     }
 
     if (nonEmptyCount === 1) {
-      console.log("bla");
       return `<circle cx="${(size + 6) / 2}" cy="${(size + 6) / 2}" r="${
         size / 2
       }" fill="${color}" stroke-width="${size / 2}"/>`;

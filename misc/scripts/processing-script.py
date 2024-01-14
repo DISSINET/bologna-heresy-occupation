@@ -84,7 +84,7 @@ df['f_cathar_milieu'] = df['ones'].where((df['cathar_milieu']==1) & (df['sex']==
 df['f_other_heterodoxy'] = df['ones'].where((df['other_heterodoxy']==1) & (df['sex']=='f'), 0)
 
 df['f_undef_heresy'] = df['ones'].where(((df['cathar_milieu']==0) & (df['apostolic_milieu']==0) & (df['other_heterodoxy']==0) & (df['sex']=='f')), 0)
-df['m_undef_occ'] = df['ones'].where((pd.isnull(df['occupation_type'])) & (df['sex']=='f'), 0)
+df['f_undef_occ'] = df['ones'].where((pd.isnull(df['occupation_type'])) & (df['sex']=='f'), 0)
 
 # deponent
 df['d_church'] = df['ones'].where((df['occupation_type']=='churchperson') & (df['deponent']=='deponent'), 0)
