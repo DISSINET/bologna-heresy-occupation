@@ -125,57 +125,57 @@ function buidPieChartData(
           };
         }
       }
-      }
+    }
 
-      if (sizeShows === "sex") {
-        if (sex.male && sex.female) {
+    if (sizeShows === "sex") {
+      if (sex.male && sex.female) {
+        data = {
+          undef_occ: parseInt(d.undef_occ),
+          church: parseInt(d.church),
+          craft: parseInt(d.craft),
+          diss: parseInt(d.diss),
+          free: parseInt(d.free),
+          man: parseInt(d.man),
+          qual: parseInt(d.qual),
+          merch: parseInt(d.merch),
+          offi: parseInt(d.offi),
+          serv: parseInt(d.serv),
+          sp: parseInt(d.sp),
+        };
+      } else {
+        if (sex.male) {
           data = {
-            undef_occ: parseInt(d.undef_occ),
-            church: parseInt(d.church),
-            craft: parseInt(d.craft),
-            diss: parseInt(d.diss),
-            free: parseInt(d.free),
-            man: parseInt(d.man),
-            qual: parseInt(d.qual),
-            merch: parseInt(d.merch),
-            offi: parseInt(d.offi),
-            serv: parseInt(d.serv),
-            sp: parseInt(d.sp),
+            undef_occ: parseInt(d["m_undef_occ"]),
+            church: parseInt(d["m_church"]),
+            craft: parseInt(d["m_craft"]),
+            diss: parseInt(d["m_diss"]),
+            free: parseInt(d["m_free"]),
+            man: parseInt(d["m_man"]),
+            qual: parseInt(d["m_qual"]),
+            merch: parseInt(d["m_merch"]),
+            offi: parseInt(d["m_offi"]),
+            serv: parseInt(d["m_serv"]),
+            sp: parseInt(d["m_sp"]),
           };
-        } else {
-          if (sex.male) {
-            data = {
-              undef_occ: parseInt(d["m_undef_occ"]),
-              church: parseInt(d["m_church"]),
-              craft: parseInt(d["m_craft"]),
-              diss: parseInt(d["m_diss"]),
-              free: parseInt(d["m_free"]),
-              man: parseInt(d["m_man"]),
-              qual: parseInt(d["m_qual"]),
-              merch: parseInt(d["m_merch"]),
-              offi: parseInt(d["m_offi"]),
-              serv: parseInt(d["m_serv"]),
-              sp: parseInt(d["m_sp"]),
-            };
-          }
-          if (sex.female) {
-            data = {
-              undef_occ: parseInt(d["f_undef_occ"]),
-              church: parseInt(d["f_church"]),
-              craft: parseInt(d["f_craft"]),
-              diss: parseInt(d["f_diss"]),
-              free: parseInt(d["f_free"]),
-              man: parseInt(d["f_man"]),
-              qual: parseInt(d["f_qual"]),
-              merch: parseInt(d["f_merch"]),
-              offi: parseInt(d["f_offi"]),
-              serv: parseInt(d["f_serv"]),
-              sp: parseInt(d["f_sp"]),
-            };
-          }
+        }
+        if (sex.female) {
+          data = {
+            undef_occ: parseInt(d["f_undef_occ"]),
+            church: parseInt(d["f_church"]),
+            craft: parseInt(d["f_craft"]),
+            diss: parseInt(d["f_diss"]),
+            free: parseInt(d["f_free"]),
+            man: parseInt(d["f_man"]),
+            qual: parseInt(d["f_qual"]),
+            merch: parseInt(d["f_merch"]),
+            offi: parseInt(d["f_offi"]),
+            serv: parseInt(d["f_serv"]),
+            sp: parseInt(d["f_sp"]),
+          };
         }
       }
     }
+  }
   data = fn(data);
   return data;
 }

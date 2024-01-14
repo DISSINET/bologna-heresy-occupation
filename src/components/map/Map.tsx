@@ -168,7 +168,16 @@ const MapComponent = ({}): JSX.Element => {
           </InputGroup.Text>
           <InputGroup.Text className="boxShadow">
             <small>
-              {countPeople(structureShows, locations, rel, occ)} people
+              {countPeople(
+                structureShows,
+                locations,
+                rel,
+                occ,
+                sizeShows,
+                sex,
+                pos
+              )}{" "}
+              people
             </small>
           </InputGroup.Text>
         </InputGroup>
