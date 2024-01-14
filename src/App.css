@@ -85,8 +85,8 @@
   border-color: #33a02c !important;
 }
 .check-offi:checked {
-  background-color: #6a3d9a !important;
-  border-color: #6a3d9a !important;
+  background-color: #000000 !important;
+  border-color: #000000 !important;
 }
 .check-serv:checked {
   background-color: #bc80bd !important;

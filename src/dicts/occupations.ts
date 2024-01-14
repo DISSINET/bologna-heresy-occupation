@@ -6,7 +6,7 @@ export const Occupations = [
   { id: "man", name: "manual worker", color: "#fdbf6f" },
   { id: "qual", name: "manufacturer or qualified worker", color: "#ff7f00" },
   { id: "merch", name: "merchant", color: "#33a02c" },
-  { id: "offi", name: "official", color: "#6a3d9aa" },
+  { id: "offi", name: "official", color: "#000000" },
   { id: "serv", name: "servant", color: "#bc80bd" },
   { id: "sp", name: "service provider", color: "#b15928" },
   { id: "undef_occ", name: "unknown", color: "#E8E6E1" },

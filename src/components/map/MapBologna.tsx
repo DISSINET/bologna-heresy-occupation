@@ -98,7 +98,17 @@ const MapComponentBologna = ({}): JSX.Element => {
     sizeScale: 1,
     getIcon: (d, { index }) => ({
       url: svgToDataURL(
-        createSVGIcon(d, getRadius, getHiglight, structureShows, rel, occ)
+        createSVGIcon(
+          d,
+          getRadius,
+          getHiglight,
+          structureShows,
+          rel,
+          occ,
+          sizeShows,
+          sex,
+          pos
+        )
       ),
       width: getRadius(d),
       height: getRadius(d),
@@ -116,7 +126,15 @@ const MapComponentBologna = ({}): JSX.Element => {
     // like useEffect <function>:<value change that triggers rerun>
     updateTriggers: {
       getSize: [pos, sex, sizeShows],
-      getIcon: [selectedLocation, occ, rel, structureShows],
+      getIcon: [
+        selectedLocation,
+        occ,
+        rel,
+        structureShows,
+        pos,
+        sex,
+        sizeShows,
+      ],
     },
   });
 
