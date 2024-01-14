@@ -60,6 +60,10 @@ df['m_offi'] = df['ones'].where((df['occupation_type']=='official') & (df['sex']
 df['m_serv'] = df['ones'].where((df['occupation_type']=='servant') & (df['sex']=='m'), 0)
 df['m_sp'] = df['ones'].where((df['occupation_type']=='service provider') & (df['sex']=='m'), 0)
 
+df['m_apostolic_milieu'] = df['ones'].where((df['apostolic_milieu']==1) & (df['sex']=='m'), 0)
+df['m_cathar_milieu'] = df['ones'].where((df['cathar_milieu']==1) & (df['sex']=='m'), 0)
+df['m_other_heterodoxy'] = df['ones'].where((df['other_heterodoxy']==1) & (df['sex']=='m'), 0)
+
 df['m_undef_heresy'] = df['ones'].where(((df['cathar_milieu']==0) & (df['apostolic_milieu']==0) & (df['other_heterodoxy']==0) & (df['sex']=='m')), 0)
 df['m_undef_occ'] = df['ones'].where((pd.isnull(df['occupation_type'])) & (df['sex']=='m'), 0)
 
@@ -74,6 +78,10 @@ df['f_merch'] = df['ones'].where((df['occupation_type']=='merchant') & (df['sex'
 df['f_offi'] = df['ones'].where((df['occupation_type']=='official') & (df['sex']=='f'), 0)
 df['f_serv'] = df['ones'].where((df['occupation_type']=='servant') & (df['sex']=='f'), 0)
 df['f_sp'] = df['ones'].where((df['occupation_type']=='service provider') & (df['sex']=='f'), 0)
+
+df['f_apostolic_milieu'] = df['ones'].where((df['apostolic_milieu']==1) & (df['sex']=='f'), 0)
+df['f_cathar_milieu'] = df['ones'].where((df['cathar_milieu']==1) & (df['sex']=='f'), 0)
+df['f_other_heterodoxy'] = df['ones'].where((df['other_heterodoxy']==1) & (df['sex']=='f'), 0)
 
 df['f_undef_heresy'] = df['ones'].where(((df['cathar_milieu']==0) & (df['apostolic_milieu']==0) & (df['other_heterodoxy']==0) & (df['sex']=='f')), 0)
 df['m_undef_occ'] = df['ones'].where((pd.isnull(df['occupation_type'])) & (df['sex']=='f'), 0)
@@ -90,6 +98,10 @@ df['d_offi'] = df['ones'].where((df['occupation_type']=='official') & (df['depon
 df['d_serv'] = df['ones'].where((df['occupation_type']=='servant') & (df['deponent']=='deponent'), 0)
 df['d_sp'] = df['ones'].where((df['occupation_type']=='service provider') & (df['deponent']=='deponent'), 0)
 
+df['d_apostolic_milieu'] = df['ones'].where((df['apostolic_milieu']==1) & (df['deponent']=='deponent'), 0)
+df['d_cathar_milieu'] = df['ones'].where((df['cathar_milieu']==1) & (df['deponent']=='deponent'), 0)
+df['d_other_heterodoxy'] = df['ones'].where((df['other_heterodoxy']==1) & (df['deponent']=='deponent'), 0)
+
 df['d_undef_heresy'] = df['ones'].where(((df['cathar_milieu']==0) & (df['apostolic_milieu']==0) & (df['other_heterodoxy']==0) & (df['deponent']=='deponent')), 0)
 df['d_undef_occ'] = df['ones'].where(pd.isnull(df['occupation_type'])& (df['deponent']=='deponent'), 0)
 
@@ -104,6 +116,10 @@ df['n_merch'] = df['ones'].where((df['occupation_type']=='merchant') & (df['depo
 df['n_offi'] = df['ones'].where((df['occupation_type']=='official') & (df['deponent']=='non-deponent'), 0)
 df['n_serv'] = df['ones'].where((df['occupation_type']=='servant') & (df['deponent']=='non-deponent'), 0)
 df['n_sp'] = df['ones'].where((df['occupation_type']=='service provider') & (df['deponent']=='non-deponent'), 0)
+
+df['n_apostolic_milieu'] = df['ones'].where((df['apostolic_milieu']==1) & (df['deponent']=='non-deponent'), 0)
+df['n_cathar_milieu'] = df['ones'].where((df['cathar_milieu']==1) & (df['deponent']=='non-deponent'), 0)
+df['n_other_heterodoxy'] = df['ones'].where((df['other_heterodoxy']==1) & (df['deponent']=='non-deponent'), 0)
 
 df['n_undef_heresy'] = df['ones'].where(((df['cathar_milieu']==0) & (df['apostolic_milieu']==0) & (df['other_heterodoxy']==0) & (df['deponent']=='non-deponent')), 0)
 df['n_undef_occ'] = df['ones'].where(pd.isnull(df['occupation_type']) & (df['deponent']=='non-deponent'), 0)
@@ -123,9 +139,6 @@ grp_df = df.groupby(['residence_x_coordinates', 'residence_y_coordinates'], as_i
 # sort desc
 grp_df.sort_values(by=['all'], inplace=True, ascending=False)
 del grp_df['all']
-
-# split by location
-
 
 # save output 
 # grp_df.to_csv( f"{args.outfile}", encoding='utf-8-sig')
