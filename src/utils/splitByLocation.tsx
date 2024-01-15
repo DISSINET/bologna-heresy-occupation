@@ -27,7 +27,7 @@ export default function splitByLocation() {
       idsList = idsList.filter((i) => i !== "");
       let intersect = idsList.filter((i) => bolognaIds.includes(i));
       if (intersect.length === 0) {
-       outB.push(l);
+        outB.push(l);
       }
     }
   });
