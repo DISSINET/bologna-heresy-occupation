@@ -510,17 +510,44 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
             />{" "}
             <Modal.Body>
               <p>
-This map shows the locations of residence of people suspected of heresy in the inquisition register of Bologna, 1291–1310. It looks at the distribution of suspects in space and at their sociodemographic characteristics (sex, type of occupation), religious affiliation (Cathar milieu, Apostolic milieu, and other heterodoxy), as well as their role in the trial (deponent or non-deponent). Any of these characteristics can be used to filter the set of persons shown.
+                This map shows the locations of residence of people suspected of
+                heresy in the inquisition register of Bologna, 1291–1310. It
+                looks at the distribution of suspects in space and at their
+                sociodemographic characteristics (sex, type of occupation),
+                religious affiliation (Cathar milieu, Apostolic milieu, and
+                other heterodoxy), as well as their role in the trial (deponent
+                or non-deponent). Any of these characteristics can be used to
+                filter the set of persons shown.
               </p>
               <p>
-              The map is divided into two main parts, one showing locations outside Bologna, the other focusing on Bologna. A switch in the right panel sets whether the map symbol should show occupation, or religious affiliation. Then, for each location, a pie mini-chart shows the occupational, or religious profile of suspects in the given location, and also displays the proportion of persons from that location for whom the attribute is unknown. The display can be filtered, e.g. to show only craftsmen, or only those affiliated to the Apostolic movement. After clicking on a location, the right panel shows the list of persons from that location alongside their characteristics. The coordinates of that location can be copied by clicking on them in the right panel.
-              </p>
-                <p>
-              We included all individuals incriminated in the register, either by another person or by themselves. We did not include persons who were mentioned but not incriminated (e.g., father as part of the identification of a suspect, people mentioned but not involved in dissidence).
+                The map is divided into two main parts, one showing locations
+                outside Bologna, the other focusing on Bologna. A switch in the
+                right panel sets whether the map symbol should show occupation,
+                or religious affiliation. Then, for each location, a pie
+                mini-chart shows the occupational, or religious profile of
+                suspects in the given location, and also displays the proportion
+                of persons from that location for whom the attribute is unknown.
+                The display can be filtered, e.g. to show only craftsmen, or
+                only those affiliated to the Apostolic movement. After clicking
+                on a location, the right panel shows the list of persons from
+                that location alongside their characteristics. The coordinates
+                of that location can be copied by clicking on them in the right
+                panel.
               </p>
               <p>
-              We do not know specific locations of persons’ houses; the level of precision stops at the settlement level (for locations outside of Bologna) or parish level (for Bologna). On the Bologna map, we also included residents of Bologna for whom the parish is not known.
-            </p>
+                We included all individuals incriminated in the register, either
+                by another person or by themselves. We did not include persons
+                who were mentioned but not incriminated (e.g., father as part of
+                the identification of a suspect, people mentioned but not
+                involved in dissidence).
+              </p>
+              <p>
+                We do not know specific locations of persons’ houses; the level
+                of precision stops at the settlement level (for locations
+                outside of Bologna) or parish level (for Bologna). On the
+                Bologna map, we also included residents of Bologna for whom the
+                parish is not known.
+              </p>
 
               <ul style={{ listStyle: "none" }}>
                 <li>

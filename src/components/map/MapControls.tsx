@@ -72,7 +72,7 @@ const MapControls = ({}): JSX.Element => {
           size="sm"
           variant="outline-dark"
           //disabled={mapState.bearing === 0 ? true : false}
-          title="Reset map orientation (right-click drag in map to change orientation)"
+          title="Reset map orientation to default (North). To change the map orientaton, hold the right mouse button in the map field and move the cursor"
           onClick={() => {
             dispatch(restoreDefaultBearing());
           }}
@@ -85,7 +85,7 @@ const MapControls = ({}): JSX.Element => {
           size="sm"
           //disabled={mapState.pitch === 0 ? true : false}
           variant="outline-dark"
-          title="Reset map pitch (right-click drag in map to change pitch)"
+          title="Reset map viewing angle to default (90°). To change the map orientaton, hold the right mouse button in the map field and move the cursor" 
           onClick={() => {
             dispatch(restoreDefaultPitch());
           }}
