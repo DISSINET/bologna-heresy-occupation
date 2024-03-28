@@ -178,7 +178,11 @@ const MapComponentBologna = ({}): JSX.Element => {
         controller={true}
         layers={layers}
         getTooltip={({ object }) =>
-          object && `${getResidenceNames(object.residence_id).join("\n")}`
+          object &&
+          `${
+            getResidenceNames(object.residence_id).slice(0, 4).join("\n") +
+            (getResidenceNames(object.residence_id).length > 4 ? " ..." : "")
+          }`
         }
         getCursor={({ isDragging }) => (isDragging ? "arrow" : "arrow")}
         style={{

@@ -149,9 +149,6 @@ const MapComponentEmpty = ({}): JSX.Element => {
         viewState={mapState}
         controller={true}
         layers={layers}
-        getTooltip={({ object }) =>
-          object && `${getResidenceNames(object.residence_id).join("\n")}`
-        }
         getCursor={({ isDragging }) => (isDragging ? "arrow" : "arrow")}
         style={{
           top: "50%",
