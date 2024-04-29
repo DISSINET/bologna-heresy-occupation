@@ -191,7 +191,7 @@ const MapComponentBologna = ({}): JSX.Element => {
           width: "50%",
         }}
       />
-      <MapScaleBologna definitionLayer={city} top={"95%"} />
+      <MapScaleBologna definitionLayer={city} top={"92%"} />
     </div>
   );
 };

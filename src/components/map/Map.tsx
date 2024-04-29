@@ -179,7 +179,7 @@ const MapComponent = ({}): JSX.Element => {
           height: "50%",
         }}
       />
-      <MapScale definitionLayer={cityLevel} top={"45%"} />
+      <MapScale definitionLayer={cityLevel} top={"42%"} />
     </div>
   );
 };
