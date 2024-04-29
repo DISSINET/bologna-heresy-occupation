@@ -186,7 +186,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
     });
     return <ListGroup variant="flush">{items}</ListGroup>;
   }
-    function dissinetLogo() {
+  function dissinetLogo() {
     return (
       <svg
         className="pin-r"
@@ -224,6 +224,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
           overflowY: "scroll",
           display: "flex",
           flexFlow: "column nowrap",
+          marginBottom: "60px",
           gap: "20px",
         }}
       >
