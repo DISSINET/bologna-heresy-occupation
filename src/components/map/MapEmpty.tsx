@@ -120,14 +120,13 @@ const MapComponentEmpty = ({}): JSX.Element => {
           position: "absolute",
           left: "50%",
           top: "50%",
-          zIndex: 1000,
           padding: "5px",
           paddingLeft: "15px",
         }}
       >
         <InputGroup>
           <InputGroup.Text className="boxShadowThin">
-            <b>Unspecified location</b>
+            <b>Unknown/non-geocoded location</b>
           </InputGroup.Text>
           <InputGroup.Text className="boxShadowThin">
             <small>
