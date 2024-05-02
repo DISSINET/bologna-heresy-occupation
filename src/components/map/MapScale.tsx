@@ -102,9 +102,6 @@ const MapScale = ({ definitionLayer, top }: MapScaleProps): JSX.Element => {
         color: getColor(),
       }}
     >
-      <small>
-        <small>{pitch < 0.5 ? "" : "scale varies with perspective"}</small>
-      </small>
       <div
         style={{
           width: getScaleLength(),
@@ -113,6 +110,9 @@ const MapScale = ({ definitionLayer, top }: MapScaleProps): JSX.Element => {
       >
         <small>{getScale()[0]}</small>
       </div>
+      <small>
+        <small>{pitch < 0.5 ? "" : "scale varies with perspective"}</small>
+      </small>
     </div>
   );
 };

@@ -11,6 +11,7 @@ import getResidenceNames from "../../utils/getResidenceName";
 import { InputGroup } from "react-bootstrap";
 import createSVGIcon from "../../utils/makePieChart";
 import countPeople from "../../utils/countPeople";
+import { GoQuestion } from "react-icons/go";
 
 const MapComponentBologna = ({}): JSX.Element => {
   const mapState = useAppSelector((state) => state.bologna);
@@ -172,6 +173,23 @@ const MapComponentBologna = ({}): JSX.Element => {
           </InputGroup.Text>
         </InputGroup>
       </div>
+      <div
+        title="&copy; OpenStreetMap contributors &copy;CARTO"
+        style={{
+          position: "absolute",
+          zIndex: 1000,
+          left: "10px",
+          bottom: "4px",
+          paddingLeft: "2px",
+          paddingRight: "2px",
+        }}
+      >
+        <GoQuestion />{" "}
+        <small>
+          <small>basemap</small>
+        </small>
+      </div>
+
       <DeckGL
         viewState={mapState}
         onViewStateChange={(e: any) => dispatchMapState(e.viewState)}

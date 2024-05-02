@@ -105,9 +105,6 @@ const MapScaleBologna = ({
         color: getColor(),
       }}
     >
-      <small>
-        <small>{pitch < 0.5 ? "" : "scale varies with perspective"}</small>
-      </small>
       <div
         style={{
           width: getScaleLength(),
@@ -116,6 +113,9 @@ const MapScaleBologna = ({
       >
         <small>{getScale()[0]}</small>
       </div>
+      <small>
+        <small>{pitch < 0.5 ? "" : "scale varies with perspective"}</small>
+      </small>
     </div>
   );
 };

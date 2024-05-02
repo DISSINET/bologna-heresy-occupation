@@ -11,6 +11,7 @@ import getResidenceNames from "../../utils/getResidenceName";
 import InputGroup from "react-bootstrap/InputGroup";
 import createSVGIcon from "../../utils/makePieChart";
 import countPeople from "../../utils/countPeople";
+import { GoQuestion } from "react-icons/go";
 //import splitByLocation from "../../utils/splitByLocation";
 
 const MapComponent = ({}): JSX.Element => {
@@ -165,6 +166,22 @@ const MapComponent = ({}): JSX.Element => {
             </small>
           </InputGroup.Text>
         </InputGroup>
+      </div>
+      <div
+        title="Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community"
+        style={{
+          position: "absolute",
+          zIndex: 1000,
+          left: "10px",
+          top: "47%",
+          paddingLeft: "2px",
+          paddingRight: "2px",
+        }}
+      >
+        <GoQuestion />{" "}
+        <small>
+          <small>basemap</small>
+        </small>
       </div>
       <DeckGL
         viewState={mapState}
