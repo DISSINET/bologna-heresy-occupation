@@ -431,14 +431,20 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                     );
                   }}
                 >
-                  <GoLocation />{" "}
+                  {selectedLocation["residence_x_coordinates"] === null ? (
+                    <small>{"unknown/non-geocoded location "}</small>
+                  ) : (
+                    <>
+                      <GoLocation />{" "}
+                      <small>
+                        <small>
+                          {selectedLocation["residence_y_coordinates"]},
+                          {selectedLocation["residence_x_coordinates"]}
+                        </small>
+                      </small>
+                    </>
+                  )}
                   <small>
-                    <small>
-                      <>
-                        {selectedLocation["residence_y_coordinates"]},
-                        {selectedLocation["residence_x_coordinates"]}
-                      </>
-                    </small>
                     <CloseButton
                       aria-label="Hide"
                       onClick={deselectLocation}
@@ -457,6 +463,8 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
                   <Card.Subtitle className="mb-1 text-muted">
                     <small>residences in location</small>
                   </Card.Subtitle>
+                ) : selectedLocation["residence_x_coordinates"] === null ? (
+                  ""
                 ) : (
                   <Card.Subtitle className="mb-1 text-muted">
                     <small>residence</small>
