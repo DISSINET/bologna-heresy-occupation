@@ -224,7 +224,7 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
           overflowY: "scroll",
           display: "flex",
           flexFlow: "column nowrap",
-          marginBottom: "60px",
+          marginBottom: "68px",
           gap: "20px",
         }}
       >
@@ -508,9 +508,12 @@ const PanelComponent = ({}: PanelComponentProps): JSX.Element => {
             bottom: "0",
             right: "0",
             left: "0",
-            height: "60px",
+            height: "68px",
           }}
         >
+          <a target="_blank" rel="noreferrer" href="https://dissinet.cz">
+            {dissinetLogo()}
+          </a>
           <Button
             size="sm"
             variant="outline-dark"
