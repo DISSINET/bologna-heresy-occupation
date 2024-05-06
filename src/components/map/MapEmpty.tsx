@@ -3,10 +3,10 @@ import { IconLayer } from "@deck.gl/layers/typed";
 import { useAppSelector, useAppDispatch } from "./../../app/hooks";
 import { selectLocation } from "./../MainSlice";
 import locations from "../../data/locations-none.json";
-import getResidenceNames from "../../utils/getResidenceName";
 import InputGroup from "react-bootstrap/InputGroup";
 import createSVGIcon from "../../utils/makePieChart";
 import countPeople from "../../utils/countPeople";
+import { useState, useEffect } from "react";
 
 const MapComponentEmpty = ({}): JSX.Element => {
   const mapState = {
@@ -35,6 +35,17 @@ const MapComponentEmpty = ({}): JSX.Element => {
   const rel = useAppSelector((state) => state.main.rel);
   const occ = useAppSelector((state) => state.main.occ);
 
+  const [widthsize, setWidthsize] = useState<number>();
+  const [symbolOverflow, toggleSymbolOverflow] = useState(true);
+
+  useEffect(() => {
+    window.addEventListener("resize", getBounds);
+    getBounds();
+    return () => {
+      window.removeEventListener("resize", getBounds);
+    };
+  }, []);
+
   function getHiglight(d: any): number {
     if (selectedLocation["residence_id"] == d.residence_id) {
       return 3;
@@ -42,16 +53,33 @@ const MapComponentEmpty = ({}): JSX.Element => {
     return 1;
   }
 
+  function getBounds() {
+    let wrapper = document
+      .getElementById("no-location-wrapper")!
+      .getBoundingClientRect();
+    let minBound = Math.min(wrapper.width, wrapper.height);
+    setWidthsize(minBound);
+    return minBound;
+  }
+
   function getRadius(d: any): number {
+    let maxRadius = getBounds();
+    let size;
     if (sizeShows === "pos") {
       let dep = pos.dep ? parseInt(d.dep) : 0;
       let nondep = pos.nondep ? parseInt(d.non_dep) : 0;
-      return (dep + nondep) * 0.8;
+      size = (dep + nondep) * 0.8;
     } else {
       let male = sex.male ? parseInt(d.male) : 0;
       let female = sex.female ? parseInt(d.female) : 0;
-      return (male + female) * 0.8;
+      size = (male + female) * 0.8;
     }
+    if (maxRadius < size) {
+      toggleSymbolOverflow(true);
+    } else {
+      toggleSymbolOverflow(false);
+    }
+    return Math.min(maxRadius, size);
   }
 
   function svgToDataURL(svg: any) {
@@ -98,7 +126,7 @@ const MapComponentEmpty = ({}): JSX.Element => {
     },
     // like useEffect <function>:<value change that triggers rerun>
     updateTriggers: {
-      getSize: [pos, sex, sizeShows],
+      getSize: [pos, sex, sizeShows, widthsize],
       getIcon: [
         selectedLocation,
         occ,
@@ -120,6 +148,7 @@ const MapComponentEmpty = ({}): JSX.Element => {
           position: "absolute",
           left: "50%",
           top: "50%",
+          maxWidth: "25%",
           padding: "5px",
           paddingLeft: "15px",
         }}
@@ -144,8 +173,24 @@ const MapComponentEmpty = ({}): JSX.Element => {
           </InputGroup.Text>
         </InputGroup>
       </div>
+      <div
+        style={{
+          position: "absolute",
+          zIndex: 1000,
+          left: "50%",
+          bottom: "4px",
+          paddingLeft: "7px",
+        }}
+      >
+        <small>
+          <small>
+            {symbolOverflow ? " * chart size downscaled to fit the window" : ""}
+          </small>
+        </small>
+      </div>
       <DeckGL
         viewState={mapState}
+        id={"no-location-wrapper"}
         controller={true}
         layers={layers}
         getCursor={({ isDragging }) => (isDragging ? "arrow" : "arrow")}
